@@ -1,0 +1,24 @@
+// @import '~resources/css/css/style.css';
+// @import '~resources/css/css/calendar.css';
+// @import '~resources/css/css/halfpage.css';
+// @import '~resources/css/css/simcify.css'; 
+
+
+
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+
+
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
