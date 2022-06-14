@@ -16,7 +16,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
 
-    
+
     <link rel="stylesheet" href="{{ asset('css/css/style.css') }}" />
         <!-- Styles -->
         <style>
@@ -98,57 +98,71 @@
             height:160px;
             margin-top:15px;
             }
+            #videoBG {
+                position: fixed;
+                right: 0;
+                bottom: 0;
+                min-width: 100%;
+                min-height: 100%;
+                z-index: -1;
+            }
+            @media (min-aspect-ratio: 16/9) {
+                #videoBG {
+                    width:100%;
+                    height: auto;
+             }
+}
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            
+
             @if (Route::has('login'))
                 <div class="top-right links " style="color: white">
-                    @auth 
-                        <a href="{{ url('/dashboard') }}">{{ __('Dashboard') }}</a> 
+                    @auth
+                        <a href="{{ url('/dashboard') }}">{{ __('Dashboard') }}</a>
                     @else
-                            <a href="{{ route('login') }}">Login</a> 
+                            <a href="{{ route('login') }}">Login</a>
                         @if (Route::has('register'))
                             <!--<a href="{{ route('register') }}">Register</a>-->
-                            
-                            
+
+
                             <a href="{{ route('student.register') }}">Register</a>
-                            
-                            <a href="{{ route('register') }}">Stafff Registration</a>
-                             
-    
+
+                            <a href="{{ route('register') }}">Staff Registration</a>
+
+
                         @endif
-                        
+
                             <a href="{{ route('contact-us') }}">Contact Us</a>
                     @endauth
                 </div>
-            @endif 
+            @endif
             <div class="content">
                 <div class="title m-b-md">
 
-  
-                         
+
+
                         <h1><b><i> DriSMS </i></b></h1>
                         <p> Designing your driving future. </p>
-                </div> 
+                </div>
             </div>
         </div>
 
-        <script>  
+        <script>
 
 
         // var qrcode = new QRCode("qrcode");
 
-        //     function makeCode () {    
+        //     function makeCode () {
         //     var elText = document.getElementById("text");
-            
+
         //     if (!elText.value) {
         //         alert("Input a text");
         //         elText.focus();
         //         return;
         //     }
-            
+
         //     qrcode.makeCode(elText.value);
         //     }
 
@@ -165,5 +179,8 @@
         //     });
 
     </script>
+    <video id="videoBG" autoplay muted loop>
+        <source src="{{ asset("assets/video/v.mp4") }}" type="video/mp4">
+    </video>
     </body>
 </html>

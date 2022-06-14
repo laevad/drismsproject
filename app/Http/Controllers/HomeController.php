@@ -60,13 +60,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function showRegistrationForm()
-    // {
-    //     $communication= Communication::all();
+    public function showRegistrationForm()
+    {
+        $communication = Communication::all();
 
-    //     dd($communication);
-    //     return view('auth.register', compact('communication'));
-    // }
+        dd($communication);
+        return view('auth.register', compact('communication'));
+    }
 
     public function sendError($title, $error)
     {
@@ -386,6 +386,7 @@ class HomeController extends Controller
 
         $is_Admin = User::where('role', 'Admin')->first();
 
+
         $to_email = $is_Admin->email;
         $to_name = $is_Admin->fname . ' ' . $is_Admin->lname;
 
@@ -398,10 +399,9 @@ class HomeController extends Controller
             'from_email' => $from_email,
             'body' => $request->message
         );
-        print_r($data);
-        return;
 
-        $is_send = Mail::send(
+
+        \Mail::send(
             'emails.mail',
             $data,
             function ($message) use ($to_name, $to_email, $from_email, $from_name, $subject) {
@@ -409,6 +409,8 @@ class HomeController extends Controller
                 $message->to($to_email, $to_name)->subject($subject);
             }
         );
+
+
 
 
         $notification1 = new Notification();
