@@ -98,14 +98,14 @@
                                                                                         <td><input type="checkbox" name="practical_driving_course_mv" value="8 Hours Practical Driving Course (MV)"/></td>
                                                                                         <td><label>8 Hours Practical Driving Course (MV)</label> </td>
                                                                                     </tr>
-                                                                                    <tr>
+                                                                                    {{-- <tr>
                                                                                         <td><input type="checkbox" name="manual_transmission_mv" value="Manual Transmission"/></td>
                                                                                         <td>  <label>Manual Transmission</label> </td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td><input type="checkbox" name="automatic_transmission_mv" value="Automatic Transmission"/></td>
                                                                                         <td><label>Automatic Transmission</label></td>
-                                                                                    </tr>
+                                                                                    </tr> --}}
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
@@ -117,14 +117,14 @@
                                                                                         <td><input type="checkbox" name="practical_driving_course_mc" value="8 Hours Practical Driving Course (MC)" /></td>
                                                                                         <td><label>8 Hours Practical Driving Course (MC)</label> </td>
                                                                                     </tr>
-                                                                                    <tr>
+                                                                                    {{-- <tr>
                                                                                         <td><input type="checkbox" name="manual_transmission_mc" value="Manual Transmission" /></td>
                                                                                         <td>  <label>Manual Transmission</label> </td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td><input type="checkbox" name="automatic_transmission_mc" value="Automatic Transmission"/></td>
                                                                                         <td><label>Automatic Transmission</label></td>
-                                                                                    </tr>
+                                                                                    </tr> --}}
 
                                                                                     <tr >
                                                                                         <td><input type="checkbox" class="others_mc" /></td>
