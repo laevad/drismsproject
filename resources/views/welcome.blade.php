@@ -21,7 +21,7 @@
         <!-- Styles -->
         <style>
             html, body {
-                background: linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)), url("/images/driving.jpg");
+                /*background: linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)), url("/images/driving.jpg");*/
                 color: #636b6f;
                 font-family: 'Poppins', sans-serif;
                 font-weight: 200;
