@@ -1,5 +1,11 @@
 @extends('layouts.header')
 @section('content')
+
+    <style>
+        body {
+            overflow: hidden; /* Hide scrollbars */
+        }
+    </style>
 <div class="container">
     @php $n = 1 @endphp
         <div class="text-center">

@@ -129,7 +129,7 @@
 
                             <a href="{{ route('student.register') }}">Register</a>
 
-                            <a href="{{ route('register') }}">Staff Registration</a>
+{{--                            <a href="{{ route('register') }}">Staff Registration</a>--}}
 
 
                         @endif
