@@ -38,7 +38,7 @@ h6 {
 .justify-around{ justify-content: space-around; }
 .justify-revert{ justify-content: revert; }
 .justify-start{ justify-content: start; }
-.items-center{ align-items: center; } 
+.items-center{ align-items: center; }
 
 .text-left	{text-align: left;}
 .text-center	{text-align: center;}
@@ -99,7 +99,7 @@ aside li {
     list-style: none;
 }
 
-aside i {    
+aside i {
     font-size: 22px;
     margin-right: 15px;
 }
@@ -547,13 +547,13 @@ p.help {
         padding: 0 10px;
         text-align: left;
         }
-        
+
     #external-events h4 {
         font-size: 16px;
         margin-top: 0;
         padding-top: 1em;
         }
-        
+
     .external-event { /* try to mimick the look of a real event */
         margin: 10px 0;
         padding: 2px 4px;
@@ -562,13 +562,13 @@ p.help {
         font-size: .85em;
         cursor: pointer;
         }
-        
+
     #external-events p {
         margin: 1.5em 0;
         font-size: 11px;
         color: #666;
         }
-        
+
     #external-events p input {
         margin: 0;
         vertical-align: middle;
@@ -883,7 +883,7 @@ ul.nav.nav-tabs li {
 .table td, .table th {
     padding: .95rem;
     vertical-align: top;
-     border-top: none; 
+     border-top: none;
 }
 .table-striped tbody tr:nth-of-type(odd) {
     background-color: #F8F8F8;
