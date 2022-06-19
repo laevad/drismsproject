@@ -25,7 +25,7 @@
                             <input type="text" class="form-control" placeholder="Name" value="{{$user->lname}}" name="">
                             <br>
                             <label>Email</label>
-                            <input type="text" class="form-control" placeholder="Name" value="{{$user->email}}" name="">
+                            <input type="email" class="form-control" placeholder="Name" value="{{$user->email}}" name="">
                             <br>
                             <label>Phone</label>
                             <input type="text" class="form-control" placeholder="Name" value="{{$user->phone}}" name="">
