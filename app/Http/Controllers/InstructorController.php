@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Instructor;
 use App\User;
- 
+
 use App\Image;
 use Auth;
 use App\Permission;
@@ -12,7 +12,7 @@ use App\Evaluation;
 
 use Illuminate\Http\Request;
 
-class InstructorController extends Controller
+class   InstructorController extends Controller
 {
 
 
@@ -23,8 +23,8 @@ class InstructorController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth'); 
-    } 
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the resource.
@@ -33,7 +33,7 @@ class InstructorController extends Controller
      */
     public function index()
     {
-        //  
+        //
         $profile_pic = User::join('images', 'users.id', '=', 'images.user_id')
         ->where('users.id', Auth::user()->id)
         ->get(['users.*', 'images.name as image_name']);
@@ -42,15 +42,15 @@ class InstructorController extends Controller
         ->where('users.role', 'Instructor')
         ->orderBy('created_at', 'DESC')
         ->get(['users.*', 'images.name as image_name']);
-        $permission = Permission::where('staff_id', '=', Auth::user()->id)->first(); 
+        $permission = Permission::where('staff_id', '=', Auth::user()->id)->first();
 
         $permission_status = "";
         if($permission) {
             if($permission->instructor == "read_only") {
                 $permission_status = "disabled";
-            } 
+            }
         }
-            
+
         return view('admin/instructor', compact('users', 'profile_pic', 'permission_status'));
     }
 
@@ -62,73 +62,73 @@ class InstructorController extends Controller
 
     public function search(Request $request){
 
-            $search = $request->search;  
+            $search = $request->search;
 
             $users = User::join('images', 'users.id', '=', 'images.user_id')
             ->where([
                 ['users.role', '=', 'Instructor'],
                 ['users.phone', 'LIKE', '%'.$search.'%'],
-                ['users.gender', 'LIKE', '%'.$request->gender.'%'] 
+                ['users.gender', 'LIKE', '%'.$request->gender.'%']
             ])
             ->orwhere([
                 ['users.role', '=', 'Instructor'],
                 ['users.email', 'LIKE', '%'.$search.'%'],
                 ['users.gender', 'LIKE', '%'.$request->gender.'%']
-            ]) 
+            ])
             ->orWhere([
                 ['users.role', '=', 'Instructor'],
                 ['users.fname', 'LIKE', '%'.$search.'%'],
-                ['users.gender', 'LIKE', '%'.$request->gender.'%'] 
-            ]) 
+                ['users.gender', 'LIKE', '%'.$request->gender.'%']
+            ])
             ->orWhere([
                 ['users.role', '=', 'Instructor'],
                 ['users.lname', 'LIKE', '%'.$search.'%'],
-                ['users.gender', 'LIKE', '%'.$request->gender.'%'] 
-            ]) 
+                ['users.gender', 'LIKE', '%'.$request->gender.'%']
+            ])
           ->orderBy('created_at', 'DESC')
-          ->get(['users.*', 'images.name as image_name']); 
-          
+          ->get(['users.*', 'images.name as image_name']);
+
             //addeded from index
 
             $profile_pic = User::join('images', 'users.id', '=', 'images.user_id')
             ->where('users.id', Auth::user()->id)
             ->get(['users.*', 'images.name as image_name']);
-    
-            $permission = Permission::where('staff_id', '=', Auth::user()->id)->first(); 
-    
+
+            $permission = Permission::where('staff_id', '=', Auth::user()->id)->first();
+
             $permission_status = "";
             if($permission) {
                 if($permission->instructor == "read_only") {
                     $permission_status = "disabled";
-                } 
+                }
             }
 
             return view('admin/instructor', compact('users', 'profile_pic', 'permission_status'));
-     
+
     }
 
 
 
     public function instructorEvaluation($classes, $classes_id, $instructor_id){
- 
+
 
        return view('evaluation', compact('classes','classes_id', 'instructor_id'));
     }
 
 
     public function instructorStoreEvaluation(Request $request){
-        
+
         $newEvaluation = new Evaluation();
 
 
         if($request->classes = 'practical'){
             $newEvaluation->fleet_schedule_id = $request->classes_id;
-        }else{ 
+        }else{
             $newEvaluation->student_course_id = $request->classes_id;
         }
         $newEvaluation->student_id = Auth::user()->id;
         $newEvaluation->instructor_id = $request->instructor_id;
-  
+
 
         $newEvaluation->classes = $request->classes;
         $newEvaluation->demonstrates_sensivity_to_students = $request->demonstrates_sensivity_to_students;
@@ -141,16 +141,16 @@ class InstructorController extends Controller
         $newEvaluation->comments = $request->comments;
         $newEvaluation->allow_comment_use = $request->allow_comment_use;
         $is_save = $newEvaluation->save();
-        
+
         if($is_save){
             return  redirect()
                     ->back()
                     ->with('success', 'Successfully evaluate the Instructor!');
-        }else{ 
+        }else{
             return  redirect()
                     ->back()
                     ->with('error', 'Failed to evaluate the Instructor!');
-        } 
+        }
      }
 
 
@@ -185,13 +185,13 @@ class InstructorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { 
+    {
 
         $existsUser = User::find($id);
 
 
-        if($existsUser){ 
-            $existsUser->status = $request->status;  
+        if($existsUser){
+            $existsUser->status = $request->status;
             $is_save = $existsUser->save();
             if($is_save){
                 return  redirect()
@@ -202,7 +202,7 @@ class InstructorController extends Controller
                     ->back()
                     ->with('error', 'Failed to update instructor status!!!');
             }
-        } 
+        }
     }
 
     /**

@@ -18,7 +18,7 @@ class ProfileController extends Controller
     public function index()
     {
         //
-        
+
     }
 
     /**
@@ -40,6 +40,25 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         //
+        $user =  User::find($request->user_id);
+
+        if($request->has("fname") &&
+            $request->has("lname") &&
+            $request->has("email") &&
+            $request->has("phone") &&
+            $request->has("dob") &&
+            $request->has("gender") &&
+            $request->has("address")){
+            $user->lname = $request->input("lname");
+            $user->fname = $request->input("fname");
+            $user->email = $request->input("email");
+            $user->phone = $request->input("phone");
+            $user->dob = $request->input("dob");
+            $user->gender = $request->input("gender");
+            $user->address = $request->input("address");
+        }
+        $user->save();
+        return redirect()->back();
     }
 
     /**
@@ -53,15 +72,15 @@ class ProfileController extends Controller
         //
         $profile_pic = User::join('images', 'users.id', '=', 'images.user_id')
         ->where('users.id', Auth::user()->id)
-        ->get(['users.*', 'images.name as image_name']); 
+        ->get(['users.*', 'images.name as image_name']);
 
 
         $user = User::join('images', 'users.id', '=', 'images.user_id')
         ->where('username','=',$username)
         ->get(['users.*', 'images.name as image_name'])->first();
-         
 
-        return view('profile', compact('user', 'profile_pic')); 
+
+        return view('profile', compact('user', 'profile_pic'));
     }
 
     /**

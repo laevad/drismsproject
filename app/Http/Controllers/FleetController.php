@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Fleet;
-use App\User;  
+use App\User;
 use App\Image;
 use App\FleetSchedule;
 use Auth;
@@ -24,8 +24,8 @@ class FleetController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth'); 
-    } 
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the resource.
@@ -33,7 +33,7 @@ class FleetController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { 
+    {
         $profile_pic = User::join('images', 'users.id', '=', 'images.user_id')
         ->where('users.id', Auth::user()->id)
         ->get(['users.*', 'images.name as image_name']);
@@ -41,17 +41,17 @@ class FleetController extends Controller
         $users= User::orderBy('created_at', 'DESC')
                 ->where('role', 'Instructor')
                 ->get();
-  
+
         $fleet = Fleet::orderBy('created_at', 'DESC')->get();
 
 
-        $permission = Permission::where('staff_id', '=', Auth::user()->id)->first(); 
+        $permission = Permission::where('staff_id', '=', Auth::user()->id)->first();
         $permission_status = "";
 
         if($permission) {
             if($permission->fleet == "read_only") {
                 $permission_status = "disabled";
-            } 
+            }
         }
 
         return view('admin/fleet', compact('users', 'fleet', 'profile_pic', 'permission_status'));
@@ -65,7 +65,7 @@ class FleetController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { 
+    {
         $fleet = new Fleet();
         $fleet->car_no = $request->carno;
         $fleet->car_plate = $request->carplate;
@@ -84,13 +84,13 @@ class FleetController extends Controller
                 ->back()
                 ->with('error', 'Failed to save data!!!');
         }
- 
-    } 
+
+    }
 
     public function showSchedule($id){
 
         $fleet = Fleet::where('id', $id)->first();
-  
+
         $instructors = User::where('role', '=', 'Instructor')
                             ->orderBy('created_at', 'desc')
                             ->get();
@@ -99,35 +99,37 @@ class FleetController extends Controller
     }
 
     public function storeSchedule(Request $request){
-   
-            $data = ''; 
-            foreach($request->day as $key => $val){ 
+
+            $data = '';
+            foreach($request->day as $key => $val){
                 if($key == array_key_last($request->day)){
                     $data .= '' . $val;
-                }else{ 
+                }else{
                     $data .= '' . $val . ', ';
                 }
-            }   
+            }
 
             $exist = FleetSchedule::where([
                 ['instructor_id', '=', $request->instructor_id],
-                ['time_start_end', '=', $request->start_end]
+                ['time_start', '=', $request->time_start],
+                ['time_end', '=', $request->time_end],
             ])->first();
             if($exist){
                 return redirect()->back()->with('exists', 'Time and instructor is already exists please go to the fleet schedule and you can just update if you want to add something.');
-            }else{ 
+            }else{
 
 
-                $newFleetSchedule = new FleetSchedule(); 
+                $newFleetSchedule = new FleetSchedule();
                 $newFleetSchedule->fleet_id = $request->fleet_id;
                 $newFleetSchedule->instructor_id = $request->instructor_id;
-                $newFleetSchedule->time_start_end = $request->start_end;
+                $newFleetSchedule->time_start = $request->time_start;
+                $newFleetSchedule->time_end = $request->time_end;
                 $newFleetSchedule->day = $data;
                 $newFleetSchedule->start = $request->start;
                 $newFleetSchedule->end = $request->end;
                 $newFleetSchedule->duration = $request->duration;
                 $newFleetSchedule->period = $request->period;
-                $is_save = $newFleetSchedule->save(); 
+                $is_save = $newFleetSchedule->save();
 
                 if($is_save){
 
@@ -146,55 +148,56 @@ class FleetController extends Controller
 
                     return redirect()->back()->with('success', 'Successfully added schedule.');
                 }else{
-                    return redirect()->back()->with('success', 'Error added schedule.'); 
+                    return redirect()->back()->with('success', 'Error added schedule.');
                 }
-            } 
-    } 
+            }
+    }
     /**
      * Display the specified resource.
      *
      * @param  \App\Fleet  $fleet
      * @return \Illuminate\Http\Response
      */
-    public function editInstructorSchedule($id){ 
+    public function editInstructorSchedule($id){
 
 
-        //$fleet = FleetSchedule::find($id); 
-         
+        //$fleet = FleetSchedule::find($id);
+
         $fleet = FleetSchedule::join('users as u', 'u.id', '=', 'fleet_schedules.instructor_id')
                                 ->join('fleet as f', 'f.id', '=', 'fleet_schedules.fleet_id')
                                 ->where('fleet_schedules.id', '=', $id)
-                                ->first(['f.*', 'u.fname as fname', 'u.lname as lname', 'fleet_schedules.*']);  
-  
+                                ->first(['f.*', 'u.fname as fname', 'u.lname as lname', 'fleet_schedules.*']);
+
 
         return view('admin/modified/instructorFleetSchedule', compact('fleet'))->with('id', $id);
 
 
-    } 
+    }
 
-    public function updateInstructorSchedule(Request $request, $id){ 
-         
+    public function updateInstructorSchedule(Request $request, $id){
+
 
 
         $fleetExists = FleetSchedule::find($id);
 
-        $data = ''; 
-        foreach($request->day as $key => $val){ 
+        $data = '';
+        foreach($request->day as $key => $val){
             if($key == array_key_last($request->day)){
                 $data .= '' . $val;
-            }else{ 
+            }else{
                 $data .= '' . $val . ', ';
             }
-        }     
+        }
 
-        if($fleetExists){  
-             
-            $fleetExists->time_start_end = $request->start_end; 
+        if($fleetExists){
+
+            $fleetExists->time_start = $request->time_start;
+            $fleetExists->time_end = $request->time_end;
             $fleetExists->day = $data;
             $fleetExists->start = $request->start;
             $fleetExists->end = $request->end;
             $fleetExists->duration = $request->duration;
-            $fleetExists->period = $request->period; 
+            $fleetExists->period = $request->period;
             $is_save = $fleetExists->save();
 
             if($is_save){
@@ -213,7 +216,7 @@ class FleetController extends Controller
 
         }
     }
- 
+
 
     public function show($id)
     {
@@ -225,17 +228,17 @@ class FleetController extends Controller
                             ->get(['fleet.*', 's.fname as fname', 's.lname as lname', 'fs.*']);
         $fleet_single = Fleet::where('id', '=', $id)->first();
 
-        $permission = Permission::where('staff_id', '=', Auth::user()->id)->first(); 
+        $permission = Permission::where('staff_id', '=', Auth::user()->id)->first();
         $permission_status = "";
-        
+
         if($permission) {
             if($permission->fleet == "read_only") {
                 $permission_status = "disabled";
-            } 
+            }
         }
- 
+
         return view('admin/review/reviewFleetSchedule', compact('fleets', 'fleet_single'));
-    } 
+    }
 
 
 
@@ -246,9 +249,9 @@ class FleetController extends Controller
         $exists = FleetSchedule::find($id);
         if($exists){
             $exists->student_id = $request->_student_id;
-            $is_save = $exists->save(); 
+            $is_save = $exists->save();
             if($is_save){
- 
+
                 $notification = new Notification();
                 // $notification->image_id = $imagemodel->id;
                 $notification->user_id = Auth::user()->id;
@@ -270,27 +273,27 @@ class FleetController extends Controller
 
 
                 return  redirect()->back()->with('success', 'Thanks for the practical registration!');
-      
+
             }else{
                 return  redirect()->back()->with('error', 'Something went wrong!!!');
-      
+
             }
-         
+
         }
 
     }
 
     public function destroyFleetSchedule($id){
-        
-        $fleetExists = FleetSchedule::find($id); 
-        
+
+        $fleetExists = FleetSchedule::find($id);
+
         if( $fleetExists )
         {
-            $fleetExists->delete();  
+            $fleetExists->delete();
             return  redirect()->back()->with('success', 'Fleet Schedule deleted successfully!');
-        } 
+        }
         return redirect()->back()->with('error', 'Sorry, we have trouble to delete data from branch');
- 
+
     }
 
     /**
@@ -301,8 +304,8 @@ class FleetController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
-        $existingFleet = Fleet::find( $id ); 
+    {
+        $existingFleet = Fleet::find( $id );
         if( $existingFleet ){
             $existingFleet->car_no = $request->carno;
             $existingFleet->car_plate = $request->carplate;
@@ -311,7 +314,7 @@ class FleetController extends Controller
             $existingFleet->model_year = $request->modelyear;
             $existingFleet->instructor_id = $request->instructor;
 
-            $is_save = $existingFleet->save(); 
+            $is_save = $existingFleet->save();
 
             if($is_save){
                 return  redirect()
@@ -323,7 +326,7 @@ class FleetController extends Controller
                     ->with('error', 'Failed to save data!!!');
             }
         }
-        return redirect()->back()->with('error', 'Sorry, we have trouble to update the fleet'); 
+        return redirect()->back()->with('error', 'Sorry, we have trouble to update the fleet');
     }
 
     /**
@@ -333,15 +336,15 @@ class FleetController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy( $id )
-    { 
-        
+    {
+
         $existingFleet = Fleet::find( $id );
 
         if( $existingFleet )
         {
-            $existingFleet->delete();  
+            $existingFleet->delete();
 
-             
+
             $notification1 = new Notification();
             // $notification->image_id = $imagemodel->id;
             $notification1->user_id = Auth::user()->id;
@@ -353,8 +356,8 @@ class FleetController extends Controller
 
 
             return  redirect()->back()->with('success', 'Fleet deleted successfully!');
-        } 
+        }
         return redirect()->back()->with('error', 'Sorry, we have trouble to delete this fleet.');
- 
+
     }
 }

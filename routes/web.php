@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SchoolController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
@@ -55,12 +56,16 @@ Route::post('communication_test/sms', 'CommunicationController@sms_test')->name(
 Route::get('/contact-us', 'HomeController@contactUs')->name('contact-us');
 Route::post('/sendmail', 'HomeController@sendEmail')->name('sendEmail');
 Route::get('pages/profiles/{id}', 'ProfileController@show')->name('profiles.show');
+Route::post('pages/profiles_update', 'ProfileController@store')->name('profiles.update');
 Route::prefix('/course')->group(function () {
     Route::post('/store', 'CourseController@store')->name('course');
 });
 Route::get('invoice/print/{id}', 'InvoiceController@paymentPrint')->name('invoice.print');
 Route::get('enrollment/form', 'EnrollmentController@enrollment')->name('enrollment.form');
 Route::get('/school/addCourse/{id}', 'SchoolController@addCourse')->name('school.course.add');
+Route::get('/school/editCourse/{id}', [SchoolController::class, 'show'])->name('school.course.edit');
+Route::post('/school/updateCourse/{id}', [SchoolController::class, 'updateCourses'])->name('school.course.update');
+Route::delete('/school/deleteCourse/{id}', [SchoolController::class, 'deleteCourses'])->name('school.course.delete');
 Route::get('/school/reviewCourse/{id}', 'SchoolController@reviewCourse')->name('school.course.review');
 Route::get('get/enrollment/branch/{id}', 'EnrollmentController@getEnrollmentBranch')->name('get.enrollment.branch');
 Route::get('get/enrollment/{school_id}/course/{course_id}/', 'EnrollmentController@getEnrollmentCourse')->name('get.course');
@@ -108,6 +113,7 @@ Route::prefix('/admin')->group(function () {
     Route::post('addPayment', 'InvoiceController@addPayment')->name('invoice.addPayment');
     Route::get('fleet/form/{id}', 'FleetController@showSchedule')->name('fleet.form.show');
     Route::post('fleet/form/store', 'FleetController@storeSchedule')->name('fleet.form.store');
+
     Route::get('instructor/fleet/schedule/form/edit/{id}', 'FleetController@editInstructorSchedule')->name('fleet.form.edit');
     Route::put('instructor/fleet/schedule/form/update/{id}', 'FleetController@updateInstructorSchedule')->name('fleet.form.update');
     Route::delete('instructor/fleet/schedule/form/delete/{id}', 'FleetController@destroyFleetSchedule')->name('fleet.form.delete');

@@ -23,14 +23,14 @@
                         <div class="slimscroll-profile-menu">
 
                             <div class="user-profile-pic">
-                                @if(!empty($user->image_name))
+                                @if(!file_exists($user->image_name))
                                     <img
                                         src="{{ url('/images'). '/' .$user->image_name }} "
                                         class="img-responsive"
                                     >
                                 @else
                                     <img
-                                        src="{{ url('/assets/images/avatar.png') }} "
+                                        src="{{ url('/assets/images/default.png') }} "
                                         class="img-responsive"
                                     >
                                 @endif

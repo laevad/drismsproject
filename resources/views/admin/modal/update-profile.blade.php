@@ -11,34 +11,34 @@
             </div>
 
             <div class="modal-body">
-                <form action="" method="POST">
+                <form action="{{ route("profiles.update") }}" method="POST">
                     @csrf
 
                     <input type="hidden" class="form-control" placeholder="Amount Paid" value="{{$user->id}}"
-                           name="student_id">
+                           name="user_id">
                     <div class="form-group">
                         <div class="col-md-12">
                             <label>First Name</label>
-                            <input required type="text" class="form-control" placeholder="Name" value="{{$user->fname}}" name="">
+                            <input required type="text" class="form-control" placeholder="Name" value="{{$user->fname}}" name="fname">
                             <br>
                             <label>Last Name</label>
-                            <input required type="text" class="form-control" placeholder="Name" value="{{$user->lname}}" name="">
+                            <input required type="text" class="form-control" placeholder="Name" value="{{$user->lname}}" name="lname">
                             <br>
                             <label>Email</label>
-                            <input required type="email" class="form-control" placeholder="Name" value="{{$user->email}}" name="">
+                            <input required type="email" class="form-control" placeholder="Name" value="{{$user->email}}" name="email">
                             <br>
                             <label>Phone</label>
-                            <input required type="text" class="form-control" placeholder="Name" value="{{$user->phone}}" name="">
+                            <input required type="text" class="form-control" placeholder="Name" value="{{$user->phone}}" name="phone">
                             <br>
                             <label>Date of Birth</label>
-                            <input required type="date" class="form-control" placeholder="Name" value="{{$user->dob}}" name="">
+                            <input required type="date" class="form-control" placeholder="Name" value="{{$user->dob}}" name="dob">
                             <br>
                             <label>Gender</label>
                             <div class="form-check">
                                 <div class="d-flex justify-content-start">
                                     <div class="d-inline">
                                         <input required id="male" type="radio"
-                                               class=" @error('gender') is-invalid @enderror"
+                                               class=" "
                                                name="gender" value="Male" {{ ($user->gender=='Male')?'checked':'' }}
                                                autocomplete="gender" autofocus>
                                         <label class="form-check-label" for="male">
@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="d-inline ml-4">
                                         <input id="female" type="radio"
-                                               class=" @error('gender') is-invalid @enderror"
+                                               class=""
                                                name="gender" value="Female" {{ ($user->gender=='Female')?'checked':''  }}
                                                autocomplete="gender" autofocus>
                                         <label class="form-check-label"
@@ -59,7 +59,7 @@
                             </div>
                             <br>
                             <label>Address</label>
-                            <input type="text" class="form-control" placeholder="Name" value="{{$user->address}}" name="">
+                            <input type="text" class="form-control" placeholder="Name" value="{{$user->address}}" name="address">
                         </div>
                     </div>
 
