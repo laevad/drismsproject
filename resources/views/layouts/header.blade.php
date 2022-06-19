@@ -8,7 +8,7 @@
     <title>{{ config('app.name', 'Drisms') }}</title>
     <link rel="shortcut icon" href="{{ asset('/assets/images/icon.ico') }}">
 
-{{--    <link rel="stylesheet" href="{{ asset('css/css/simcify.min.css') }}" />--}}
+    <link rel="stylesheet" href="{{ asset('css/css/simcify.min.css') }}" />
      <!-- Material design icons -->
     <link rel="stylesheet" href="{{ asset('css/fonts/mdi/css/materialdesignicons.min.css') }}" />
     <link href="{{ asset('libs/dropify/css/dropify.css') }}" rel="stylesheet">
@@ -19,8 +19,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
-{{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
-
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
 
         html, body{

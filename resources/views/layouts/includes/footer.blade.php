@@ -1,8 +1,8 @@
 
-<footer>
-    <p class="text-center">&copy; {{ date("Y") }}  {{ env("APP_NAME") }}. All Rights Reserved.</p>
-</footer>
 
+<div class="blockquote-footer">
+    <p class="text-center text-black-50">&copy; {{ date("Y") }}  {{ env("APP_NAME") }}. All Rights Reserved.</p>
+</div>
 <script src="{{ asset('js/components/popper.min.js') }}"></script>
 <script src="{{ asset('js/components/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('libs/bootstrap/js/bootstrap.min.js') }}"></script>

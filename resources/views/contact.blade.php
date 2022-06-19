@@ -189,8 +189,8 @@
                         <a href="{{ url('/dashboard') }}">{{ __('Dashboard') }}</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                        @if (Route::has('student.register'))
+                            <a href="{{ route('student.register') }}">Register</a>
                         @endif
 
                             <a href="{{ route('contact-us') }}">Contact Us</a>

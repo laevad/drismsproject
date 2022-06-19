@@ -35,8 +35,8 @@
 
                         <tbody>
 
-                        <tr class="dc-cls" id="">
-                            <td colspan="10">
+                        <tr class="" id="">
+                            <td>
                                 <form method="POST" action="{{ route('registerStudent') }}"
                                       enctype="multipart/form-data">
                                     @csrf
@@ -47,268 +47,100 @@
                                     {{--                                    <input type="hidden" name="school_id" value="{{$school->id}}"/>--}}
                                     {{--                                    <input type="hidden" name="course_id" value="{{$course->id}}"/>--}}
                                     {{--                                    <input type="hidden" name="school_course_id" value="{{$sc->id}}"/>--}}
-                                    <div class="form-group">
+
+
+                                    <div class="form-group table table-striped">
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <table class="table table-borderless form-drisms">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td class=""><input type="checkbox"
-                                                                            name="driving_lto_requirement"
-                                                                            value="Driving for LTO requirement"/>
-                                                        </td>
-                                                        <td><label>Driving for LTO requirement</label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox"
-                                                                   name="theoretical_driving_course"
-                                                                   value="15 Hours Theoretical Driving Course"/>
-                                                        </td>
-                                                        <td><label>15 Hours Theoretical Driving
-                                                                Course</label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox"
-                                                                   name="practical_driving_course_mv"
-                                                                   value="8 Hours Practical Driving Course (MV)"/>
-                                                        </td>
-                                                        <td><label>8 Hours Practical Driving Course
-                                                                (MV)</label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" name="manual_transmission_mv"
-                                                                   value="Manual Transmission"/></td>
-                                                        <td><label>Manual Transmission</label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" name="automatic_transmission_mv"
-                                                                   value="Automatic Transmission"/></td>
-                                                        <td><label>Automatic Transmission</label></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
 
-                                            <div class="col-md-4">
-                                                <table class="table table-borderless form-drisms">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td><input type="checkbox"
-                                                                   name="practical_driving_course_mc"
-                                                                   value="8 Hours Practical Driving Course (MC)"/>
-                                                        </td>
-                                                        <td><label>8 Hours Practical Driving Course
-                                                                (MC)</label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" name="manual_transmission_mc"
-                                                                   value="Manual Transmission"/></td>
-                                                        <td><label>Manual Transmission</label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" name="automatic_transmission_mc"
-                                                                   value="Automatic Transmission"/></td>
-                                                        <td><label>Automatic Transmission</label></td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td><input type="checkbox" class="others_mc"/>
-                                                        </td>
-                                                        <td><label>OTHERS</label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="2"
-                                                            class="hidden other-transmission">
-                                                            <label>
-                                                                <input type="text" name="others_mc"/>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <div class="col-md-4">
-
-                                                <label>Where did you know {{$school->name}} ( School
-                                                    )</label>
-
-                                                <div class="row">
-
-                                                    <div class="col-md-6">
-                                                        <table
-                                                            class="table table-borderless form-drisms">
-                                                            <tbody>
-                                                            <tr>
-                                                                <td><input type="checkbox"
-                                                                           name="where_did_you_know_school_[]"
-                                                                           value="Facebook"/></td>
-                                                                <td><label>Facebook</label></td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td><input type="checkbox"
-                                                                           name="where_did_you_know_school_[]"
-                                                                           value="Radio"/></td>
-                                                                <td><label>Radio</label></td>
-                                                            </tr>
-
-
-                                                            <tr>
-                                                                <td><input type="checkbox"
-                                                                           name="where_did_you_know_school_[]"
-                                                                           value="Google"/></td>
-                                                                <td><label>Google</label></td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td><input type="checkbox"
-                                                                           name="where_did_you_know_school_[]"
-                                                                           value="Refferal"/></td>
-                                                                <td><label>Refferal</label></td>
-                                                            </tr>
-
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <table
-                                                            class="table table-borderless form-drisms">
-                                                            <tbody>
-                                                            <tr>
-                                                                <td><input type="checkbox"
-                                                                           name="where_did_you_know_school_[]"
-                                                                           value="TV"/></td>
-                                                                <td><label>TV</label></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><input type="checkbox"
-                                                                           name="where_did_you_know_school_[]"
-                                                                           value="Flyers"/></td>
-                                                                <td><label>Flyers</label></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><input type="checkbox"
-                                                                           name="where_did_you_know_school_[]"
-                                                                           value="Billboard"/></td>
-                                                                <td><label>Billboard</label></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><input type="checkbox"
-                                                                           class="others_"/></td>
-                                                                <td><label>Others</label></td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="hidden other_inform">
-
-                                                        <label> Refered by: </label>
-                                                        <input type="text"
-                                                               name="where_did_you_know_school_[]">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="row">
                                             <div class="col-md-12">
-                                                <table class="table table-borderless form-drisms">
-                                                    <tbody>
-                                                    <tr>
-                                                        {{--                                                        <td><label>Signature:</label></td>--}}
-                                                        <td><label>Assisted by: </label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        {{--                                                        <td class="">--}}
-                                                        {{--                                                            <hr>--}}
-                                                        {{--                                                        </td>--}}
-                                                        <td class="">
-                                                            <hr>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
+                                                {{--                                                <table class="table table-borderless form-drisms">--}}
+                                                {{--                                                    <tbody>--}}
+                                                {{--                                                    <tr>--}}
+                                                {{--                                                        --}}{{--                                                        <td><label>Signature:</label></td>--}}
+                                                {{--                                                        <td><label>Assisted by: </label></td>--}}
+                                                {{--                                                    </tr>--}}
+                                                {{--                                                    <tr>--}}
+                                                {{--                                                        --}}{{--                                                        <td class="">--}}
+                                                {{--                                                        --}}{{--                                                            <hr>--}}
+                                                {{--                                                        --}}{{--                                                        </td>--}}
+                                                {{--                                                        <td class="">--}}
+                                                {{--                                                            <hr>--}}
+                                                {{--                                                        </td>--}}
+                                                {{--                                                    </tr>--}}
+                                                {{--                                                    </tbody>--}}
+                                                {{--                                                </table>--}}
 
-                                                <div class="alert alert-danger">NOTE: REGISTRATION FEE
-                                                    OF P2000 IS NON-REFUNDABLE
-                                                </div>
+                                                {{--                                                <div class="alert alert-danger">NOTE: REGISTRATION FEE--}}
+                                                {{--                                                    OF P2000 IS NON-REFUNDABLE--}}
+                                                {{--                                                </div>--}}
+
                                             </div>
 
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="row">
                                             <div class="col-md-12">
                                                 <label>Upload Profile</label>
                                                 <input type="file" name="profile_image" class="croppie"
                                                        placeholder="Course Cover Image" crop-width="400"
                                                        crop-height="190" accept="image/*">
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-6">
-                                            <label for="fname"
-                                                   class="col-form-label text-md-right">{{ __('First Name') }}</label>
-                                            <input id="fname" type="text"
-                                                   class="form-control @error('fname') is-invalid @enderror fname-{{ $n }}"
-                                                   name="fname" value="{{ old('fname') }}"
-                                                   autocomplete="fname" autofocus>
-                                            @error('fname')
-                                            <span class="invalid-feedback" role="alert">
+
+                                            <div class="col-md-6">
+                                                <label for="fname"
+                                                       class="col-form-label text-md-right">{{ __('First Name') }}</label>
+                                                <input id="fname" type="text"
+                                                       class="form-control @error('fname') is-invalid @enderror fname-{{ $n }}"
+                                                       name="fname" value="{{ old('fname') }}"
+                                                       autocomplete="fname" autofocus>
+                                                @error('fname')
+                                                <span class="invalid-feedback" role="alert">
                                                                                 <strong>{{ $message }}</strong>
                                                                             </span>
-                                            @enderror
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <label for="lname"
-                                                   class="col-form-label text-md-right">{{ __('Last Name') }}</label>
-                                            <input id="lname" type="text"
-                                                   class="form-control @error('lname') is-invalid @enderror"
-                                                   name="lname" value="{{ old('lname') }}"
-                                                   autocomplete="lname" autofocus>
-                                            @error('lname')
-                                            <span class="invalid-feedback" role="alert">
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="lname"
+                                                       class="col-form-label text-md-right">{{ __('Last Name') }}</label>
+                                                <input id="lname" type="text"
+                                                       class="form-control @error('lname') is-invalid @enderror"
+                                                       name="lname" value="{{ old('lname') }}"
+                                                       autocomplete="lname" autofocus>
+                                                @error('lname')
+                                                <span class="invalid-feedback" role="alert">
                                                                                 <strong>{{ $message }}</strong>
                                                                             </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="col-md-6">
-                                            <label for="address"
-                                                   class="col-form-label text-md-right">{{ __('Address') }}</label>
-                                            <input id="address" type="text"
-                                                   class="form-control @error('address') is-invalid @enderror"
-                                                   name="address" value="{{ old('address') }}"
-                                                   autocomplete="address" autofocus>
-                                            @error('address')
-                                            <span class="invalid-feedback" role="alert">
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="address"
+                                                       class="col-form-label text-md-right">{{ __('Address') }}</label>
+                                                <input id="address" type="text"
+                                                       class="form-control @error('address') is-invalid @enderror"
+                                                       name="address" value="{{ old('address') }}"
+                                                       autocomplete="address" autofocus>
+                                                @error('address')
+                                                <span class="invalid-feedback" role="alert">
                                                                         <strong>{{ $message }}</strong>
                                                                         </span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="dob"
-                                                   class="col-form-label text-md-right">{{ __('Date of Birth') }}</label>
-                                            <input id="dob" type="date"
-                                                   class="form-control @error('dob') is-invalid @enderror"
-                                                   name="dob" autocomplete="dob" autofocus>
-                                            @error('dob')
-                                            <span class="invalid-feedback" role="alert">
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="dob"
+                                                       class="col-form-label text-md-right">{{ __('Date of Birth') }}</label>
+                                                <input id="dob" type="date"
+                                                       class="form-control @error('dob') is-invalid @enderror"
+                                                       name="dob" autocomplete="dob" autofocus>
+                                                @error('dob')
+                                                <span class="invalid-feedback" role="alert">
                                                                                 <strong>{{ $message }}</strong>
                                                                             </span>
-                                            @enderror
+                                                @enderror
+                                            </div>
                                         </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+
+
                                     </div>
 
                                     <div class="form-group row">
@@ -418,6 +250,7 @@
                                                                             </span>
                                             @enderror
                                         </div>
+
                                         <div class="col-md-6">
                                             <label for="password-confirm"
                                                    class="col-form-label text-md-right">{{ __('Confirm Password') }}</label>
@@ -426,11 +259,92 @@
                                                    autocomplete="new-password">
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    {{--                                    -------------------------------------------------------------------}}
+
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Where did you know {{$school->name}}</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <table
+                                                class="table table-borderless form-drisms">
+                                                <tbody>
+                                                <tr>
+                                                    <td><input type="checkbox"
+                                                               name="where_did_you_know_school_[]"
+                                                               value="Facebook"/></td>
+                                                    <td><label>Facebook</label></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td><input type="checkbox"
+                                                               name="where_did_you_know_school_[]"
+                                                               value="Radio"/></td>
+                                                    <td><label>Radio</label></td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td><input type="checkbox"
+                                                               name="where_did_you_know_school_[]"
+                                                               value="Google"/></td>
+                                                    <td><label>Google</label></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td><input type="checkbox"
+                                                               name="where_did_you_know_school_[]"
+                                                               value="Refferal"/></td>
+                                                    <td><label>Refferal</label></td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <table
+                                                class="table table-borderless form-drisms">
+                                                <tbody>
+                                                <tr>
+                                                    <td><input type="checkbox"
+                                                               name="where_did_you_know_school_[]"
+                                                               value="TV"/></td>
+                                                    <td><label>TV</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="checkbox"
+                                                               name="where_did_you_know_school_[]"
+                                                               value="Flyers"/></td>
+                                                    <td><label>Flyers</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="checkbox"
+                                                               name="where_did_you_know_school_[]"
+                                                               value="Billboard"/></td>
+                                                    <td><label>Billboard</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="checkbox"
+                                                               class="others_"/></td>
+                                                    <td><label>Others</label></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="hidden other_inform">
+
+                                            <label> Refered by: </label>
+                                            <input type="text"
+                                                   name="where_did_you_know_school_[]">
+
+                                        </div>
                                     </div>
-                                    <div class="form-group row mb-0">
-                                        <div class="col-md-6 offset-md-4">
-                                            <button type="submit" class="btn btn-primary">
+                                    <br>
+                                    <div class="form-group">
+                                        <div class="col-md-12  ">
+                                            <button type="submit" class="btn btn-primary form-control">
                                                 {{ __('Register') }}
                                             </button>
 
