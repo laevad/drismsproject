@@ -14,7 +14,7 @@
                 @if(!empty($profile_pic))
                     @forelse($profile_pic as $profile)
 
-                        <img src="{{ url('/images'). '/' .$profile->image_name }}" class="img-responsive"/>
+                        <img src="{{ url('/images'). '/' . '34nudqdXO2.png' }}" class="img-responsive"/>
                     @empty
                         <img
                             src="{{ url('/assets/images/avatar.png') }} "
