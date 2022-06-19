@@ -19,25 +19,25 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <label>First Name</label>
-                            <input type="text" class="form-control" placeholder="Name" value="{{$user->fname}}" name="">
+                            <input required type="text" class="form-control" placeholder="Name" value="{{$user->fname}}" name="">
                             <br>
                             <label>Last Name</label>
-                            <input type="text" class="form-control" placeholder="Name" value="{{$user->lname}}" name="">
+                            <input required type="text" class="form-control" placeholder="Name" value="{{$user->lname}}" name="">
                             <br>
                             <label>Email</label>
-                            <input type="email" class="form-control" placeholder="Name" value="{{$user->email}}" name="">
+                            <input required type="email" class="form-control" placeholder="Name" value="{{$user->email}}" name="">
                             <br>
                             <label>Phone</label>
-                            <input type="text" class="form-control" placeholder="Name" value="{{$user->phone}}" name="">
+                            <input required type="text" class="form-control" placeholder="Name" value="{{$user->phone}}" name="">
                             <br>
                             <label>Date of Birth</label>
-                            <input type="date" class="form-control" placeholder="Name" value="{{$user->dob}}" name="">
+                            <input required type="date" class="form-control" placeholder="Name" value="{{$user->dob}}" name="">
                             <br>
                             <label>Gender</label>
                             <div class="form-check">
                                 <div class="d-flex justify-content-start">
                                     <div class="d-inline">
-                                        <input id="male" type="radio"
+                                        <input required id="male" type="radio"
                                                class=" @error('gender') is-invalid @enderror"
                                                name="gender" value="Male" {{ ($user->gender=='Male')?'checked':'' }}
                                                autocomplete="gender" autofocus>
