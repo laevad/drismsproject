@@ -1,10 +1,10 @@
-@extends('layouts.header') 
-@section('content')     
-        <!-- Admin home page --> 
-        <!-- sidebar -->  
-    @include("layouts/includes/sidebar")   
+@extends('layouts.header')
+@section('content')
+        <!-- Admin home page -->
+        <!-- sidebar -->
+    @include("layouts/includes/sidebar")
+        @include("admin/modal/update-profile")
 
-    
 
     <style>
 
@@ -13,33 +13,33 @@
         }
     </style>
 <div class="main-content">
-    <div class="page-header">   
+    <div class="page-header">
         <h3>{{ $user->fname }} {{ $user->lname }}</h3>
-    </div> 
+    </div>
     <!-- page content -->
-    <div class="row"> 
+    <div class="row">
         <div class="p-0">
 
-                        <div class="slimscroll-profile-menu"> 
+                        <div class="slimscroll-profile-menu">
 
-                            <div class="user-profile-pic"> 
+                            <div class="user-profile-pic">
                                 @if(!empty($user->image_name))
-                                    <img 
-                                        src="{{ url('/images'). '/' .$user->image_name }} " 
-                                        class="img-responsive" 
-                                    >   
+                                    <img
+                                        src="{{ url('/images'). '/' .$user->image_name }} "
+                                        class="img-responsive"
+                                    >
                                 @else
-                                    <img 
-                                        src="{{ url('/assets/images/avatar.png') }} " 
-                                        class="img-responsive" 
-                                    > 
-                                @endif 
+                                    <img
+                                        src="{{ url('/assets/images/avatar.png') }} "
+                                        class="img-responsive"
+                                    >
+                                @endif
 
 
                             </div>
                             <div class="user-profile-info">
-                                <h5>{{ $user->fname }} {{ $user->lname }}</h5> 
-                            </div> 
+                                <h5>{{ $user->fname }} {{ $user->lname }}</h5>
+                            </div>
                             <div class="profile-more-section">
                                 <ul class="nav nav-tabs">
                                 <li><a data-toggle="tab" href="#account" class="active">Account Info</a></li>
@@ -60,7 +60,7 @@
                                             <tr>
                                                 <td class="profile-item-title">Date of Birth</td>
                                                 <td class="profile-item-value">
-                                                @if( $user->dob != '0000-00-00' ) 
+                                                @if( $user->dob != '0000-00-00' )
                                                 <span>{{ date('F j, Y', strtotime($user->dob)) }}</span>
                                                 @else
                                                 <span class="text-muted">Not set</span>
@@ -76,8 +76,15 @@
                                                 <td class="profile-item-value">{{$user->address}}</td>
                                             </tr>
                                         </table>
+                                        <div class="mt-2">
+
+                                            <button class="btn btn-success btn-block"   data-toggle="modal" data-target="#update-profile{{ $user->id }}" >
+                                                Update Profile
+                                            </button>
+
+                                        </div>
                                     </div>
-                                   
+
                                         <!-- <div id="activity" class="tab-pane fade">
                                             <ol class="activity-feed">
                                             @if(!empty($timeline))
@@ -96,11 +103,11 @@
                                         </div> -->
                                 </div>
                             </div>
-        </div> 
-    </div> 
+        </div>
+    </div>
 </div>
 
 
-    @include('../layouts/includes/footer') 
+    @include('../layouts/includes/footer')
 
 @endsection

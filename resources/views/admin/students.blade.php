@@ -1,23 +1,23 @@
-@extends('layouts.header') 
-@section('content')     
-        <!-- Admin home page --> 
-        <!-- sidebar --> 
+@extends('layouts.header')
+@section('content')
+        <!-- Admin home page -->
+        <!-- sidebar -->
 
-@include("layouts/includes/sidebar")   
+@include("layouts/includes/sidebar")
 
-@include("admin/modal/student")  
+@include("admin/modal/student")
 
 <!-- main content -->
 <div class="main-content">
-    <div class="page-header"> 
+    <div class="page-header">
         <button type="button" class="btn btn-success btn-icon pull-right toggle-search">
-            <i class=" mdi mdi-filter-outline"></i> 
-            Filter & Search 
+            <i class=" mdi mdi-filter-outline"></i>
+            Filter & Search
         </button>
         <h3>Students</h3>
-    </div> 
-    <!-- page content --> 
-    <div class="row"> 
+    </div>
+    <!-- page content -->
+    <div class="row">
         <!-- search & Filter -->
         <div class="col-md-12 search-filter" style="display: none;">
             <div class="card">
@@ -27,7 +27,7 @@
                             <label>Search Name, Email or Phone</label>
                             <input type="text" class="form-control" placeholder="Search Name, Email or Phone" name="search">
                             </div>
-                    </div> 
+                    </div>
                     <div class="col-md-2">
                             <div class="form-group">
                             <label for="email">Gender</label>
@@ -41,34 +41,34 @@
                     </div>
                     <div class="col-md-2">
                         <button class="btn btn-primary btn-icon btn-block btn-sm" type="submit">
-                            <i class=" mdi mdi-filter-outline"></i> 
+                            <i class=" mdi mdi-filter-outline"></i>
                             Search
                         </button>
                     </div>
                 </form>
             </div>
-        </div> 
+        </div>
     </div>
-    
+
     @if (\Session::has('success'))
         <div class="alert alert-success">
-            {!! \Session::get('success') !!} 
+            {!! \Session::get('success') !!}
         </div>
-    @endif   
+    @endif
     @if (\Session::has('error'))
         <div class="alert alert-danger">
-            {!! \Session::get('error') !!} 
+            {!! \Session::get('error') !!}
         </div>
-    @endif 
-    <div class="row">  
+    @endif
+    <div class="row">
 
     @forelse($students as $student)
         <!-- user grid -->
         <div class="col-md-4">
             <div class="user-grid card">
                 <div class="user-grid-pic">
-                    @if( !empty($student->image_name) ) 
-                    <img src="{{url('/images'). '/' .$student->image_name }} " class="img-responsive">    
+                    @if( !empty($student->image_name) )
+                    <img src="{{url('/images'). '/' .$student->image_name }} " class="img-responsive">
                     @else
                     <img src="{{ url('assets/images/avatar.png') }} ">
                     @endif
@@ -81,10 +81,10 @@
                 <div class="row user-grid-buttons">
 
                     <div class="col-md-6">
-                        <a 
-                            class="btn btn-primary btn-block" 
+                        <a
+                            class="btn btn-primary btn-block"
                             href="{{ route('profiles.show',$student->username)}}">
-                            
+
                             Profile
                         </a>
                     </div>
@@ -93,9 +93,9 @@
                             Schedule
                         </a>
                     </div>
- 
+
                     <div class="col-md-12 mt-2">
-                   
+
                         <button class="btn btn-success btn-block"  {{$permission_status}} data-toggle="modal" data-target="#create{{ $student->id }}" >
                             Update Payment
                         </button>
@@ -107,15 +107,15 @@
                 </div> -->
             </div>
         </div>
-        @empty 
-            @include("admin/empty/empty")   
+        @empty
+            @include("admin/empty/empty")
         @endforelse
     </div>
 </div>
 
 
 
-    @include('../layouts/includes/footer') 
+    @include('../layouts/includes/footer')
     <script>
      //Hide Payment Method
      $('.paymentmethod').hide();
@@ -126,7 +126,7 @@
             $('.method').attr('required',true);
         } else {
             $('.paymentmethod').hide();
-            $('.method').attr('required',false); 
+            $('.method').attr('required',false);
         }
      });
    </script>
