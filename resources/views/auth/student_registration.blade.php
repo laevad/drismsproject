@@ -41,12 +41,12 @@
                                       enctype="multipart/form-data">
                                     @csrf
 
-{{--                                    <input type="hidden" name="rg_stdnt" value="rg_stdnt"/>--}}
-{{--                                    <input type="hidden" name="instructor_id"--}}
-{{--                                           value="{{$sc->instructor_id}}"/>--}}
-{{--                                    <input type="hidden" name="school_id" value="{{$school->id}}"/>--}}
-{{--                                    <input type="hidden" name="course_id" value="{{$course->id}}"/>--}}
-{{--                                    <input type="hidden" name="school_course_id" value="{{$sc->id}}"/>--}}
+                                    {{--                                    <input type="hidden" name="rg_stdnt" value="rg_stdnt"/>--}}
+                                    {{--                                    <input type="hidden" name="instructor_id"--}}
+                                    {{--                                           value="{{$sc->instructor_id}}"/>--}}
+                                    {{--                                    <input type="hidden" name="school_id" value="{{$school->id}}"/>--}}
+                                    {{--                                    <input type="hidden" name="course_id" value="{{$course->id}}"/>--}}
+                                    {{--                                    <input type="hidden" name="school_course_id" value="{{$sc->id}}"/>--}}
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -77,11 +77,13 @@
                                                                 (MV)</label></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="checkbox" name="manual_transmission_mv" value="Manual Transmission"/></td>
-                                                        <td>  <label>Manual Transmission</label> </td>
+                                                        <td><input type="checkbox" name="manual_transmission_mv"
+                                                                   value="Manual Transmission"/></td>
+                                                        <td><label>Manual Transmission</label></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="checkbox" name="automatic_transmission_mv" value="Automatic Transmission"/></td>
+                                                        <td><input type="checkbox" name="automatic_transmission_mv"
+                                                                   value="Automatic Transmission"/></td>
                                                         <td><label>Automatic Transmission</label></td>
                                                     </tr>
                                                     </tbody>
@@ -99,12 +101,14 @@
                                                         <td><label>8 Hours Practical Driving Course
                                                                 (MC)</label></td>
                                                     </tr>
-                                                     <tr>
-                                                        <td><input type="checkbox" name="manual_transmission_mc" value="Manual Transmission" /></td>
-                                                        <td>  <label>Manual Transmission</label> </td>
+                                                    <tr>
+                                                        <td><input type="checkbox" name="manual_transmission_mc"
+                                                                   value="Manual Transmission"/></td>
+                                                        <td><label>Manual Transmission</label></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="checkbox" name="automatic_transmission_mc" value="Automatic Transmission"/></td>
+                                                        <td><input type="checkbox" name="automatic_transmission_mc"
+                                                                   value="Automatic Transmission"/></td>
                                                         <td><label>Automatic Transmission</label></td>
                                                     </tr>
 
@@ -217,13 +221,13 @@
                                                 <table class="table table-borderless form-drisms">
                                                     <tbody>
                                                     <tr>
-{{--                                                        <td><label>Signature:</label></td>--}}
+                                                        {{--                                                        <td><label>Signature:</label></td>--}}
                                                         <td><label>Assisted by: </label></td>
                                                     </tr>
                                                     <tr>
-{{--                                                        <td class="">--}}
-{{--                                                            <hr>--}}
-{{--                                                        </td>--}}
+                                                        {{--                                                        <td class="">--}}
+                                                        {{--                                                            <hr>--}}
+                                                        {{--                                                        </td>--}}
                                                         <td class="">
                                                             <hr>
                                                         </td>
