@@ -1,5 +1,4 @@
-
-
+<hr>
 <div class="blockquote-footer">
     <p class="text-center text-black-50">&copy; {{ date("Y") }}  {{ env("APP_NAME") }}. All Rights Reserved.</p>
 </div>
