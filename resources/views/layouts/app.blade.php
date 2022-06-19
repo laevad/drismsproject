@@ -107,6 +107,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('student.register') }}">{{ __('Register') }}</a>
                             </li>
+
 {{--                            <li class="nav-item">--}}
 {{--                                <a class="nav-link" href="{{ route('register') }}">{{ __('Staff Registration') }}</a>--}}
 {{--                            </li>--}}
