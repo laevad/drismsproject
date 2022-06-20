@@ -333,13 +333,13 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="hidden other_inform">
+{{--                                        <div class="hidden other_inform">--}}
 
-                                            <label> Refered by: </label>
-                                            <input type="text"
-                                                   name="where_did_you_know_school_[]">
+{{--                                            <label> Refered by: </label>--}}
+{{--                                            <input type="text"--}}
+{{--                                                   name="where_did_you_know_school_[]">--}}
 
-                                        </div>
+{{--                                        </div>--}}
                                     </div>
                                     <br>
                                     <div class="form-group">

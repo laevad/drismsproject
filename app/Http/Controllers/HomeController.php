@@ -178,139 +178,139 @@ class HomeController extends Controller
 
 
 
-            if ($user) {
-
-
-                if (isset($request->rg_stdnt)) {
-                    $data1 = '';
-
-                    foreach ($request->where_did_you_know_school_ as  $key => $val) {
-                        if ($key == array_key_last($request->where_did_you_know_school_)) {
-                            $data1 .= '' . $val;
-                        } else {
-                            $data1 .= '' . $val . ', ';
-                        }
-                    }
-
-                    $newStudentEnrollment = new StudentCourse();
-
-                    $newStudentEnrollment->student_id = $user->id;
-
-                    if (!empty($data1)) {
-                        $newStudentEnrollment->where_did_you_know_school_ = $data1;
-                    }
-
-                    if (!empty($request->school_id)) {
-                        $newStudentEnrollment->school_id = $request->school_id;
-                    }
-
-
-
-                    if (!empty($request->school_course_id)) {
-                        $newStudentEnrollment->school_course_id = $request->school_course_id;
-                    }
-
-
-
-                    if (!empty($request->driving_lto_requirement)) {
-                        $newStudentEnrollment->driving_lto_requirement = $request->driving_lto_requirement;
-                    }
-
-
-                    if (!empty($request->theoretical_driving_course)) {
-                        $newStudentEnrollment->theoretical_driving_course = $request->theoretical_driving_course;
-                    }
-
-
-
-                    if (!empty($request->practical_driving_course_mv)) {
-                        $newStudentEnrollment->practical_driving_course_mv = $request->practical_driving_course_mv;
-                    }
-
-                    if (!empty($request->manual_transmission_mv)) {
-                        $newStudentEnrollment->manual_transmission_mv = $request->manual_transmission_mv;
-                    }
-
-
-                    if (!empty($request->automatic_transmission_mv)) {
-                        $newStudentEnrollment->automatic_transmission_mv = $request->automatic_transmission_mv;
-                    }
-
-
-                    if (!empty($request->practical_driving_course_mc)) {
-                        $newStudentEnrollment->practical_driving_course_mc = $request->practical_driving_course_mc;
-                    }
-
-                    if (!empty($request->manual_transmission_mc)) {
-                        $newStudentEnrollment->manual_transmission_mc = $request->manual_transmission_mc;
-                    }
-
-
-                    if (!empty($request->automatic_transmission_mc)) {
-                        $newStudentEnrollment->automatic_transmission_mc = $request->automatic_transmission_mc;
-                    }
-
-                    if (!empty($request->automatic_transmission_mc)) {
-                        $newStudentEnrollment->others_mc = $request->others_mc;
-                    }
-
-
-                    if (!empty($data1)) {
-                        $newStudentEnrollment->where_did_you_know_school_ = $data1;
-                    }
-
-
-
-
-                    $is_save1 = $newStudentEnrollment->save();
-
-
-
-                    if ($is_save1) {
-                        $newClass = new Classes();
-                        $newClass->student_id = $user->id;
-                        $newClass->school_id = $request->school_id;
-                        $newClass->course_id = $request->course_id;
-                        $is_save = $newClass->save();
-
-
-                        if ($is_save) {
-
-                            $id = $user->id;
-                            $existUser = User::find($id);
-                            $existUser->enrollment_status = 1;
-                            $existUser->save();
-
-
-                            $notification = new Notification();
-                            // $notification->image_id = $imagemodel->id;
-                            $notification->user_id = $user->id;
-                            $notification->status = 'active';
-                            $notification->type = 'message';
-                            $notification->message = "You are successfully enrolled you can go to your theoretical for more info.";
-                            $notification->save();
-
-                            $user_notify = User::Where('id', '=', $user->id)->first();
-
-                            $notification1 = new Notification();
-                            // $notification->image_id = $imagemodel->id;
-                            $notification1->user_id = $request->instructor_id;
-                            $notification1->status = 'active';
-                            $notification1->type = 'message';
-                            $notification1->message = "Student <strong>" . $user_notify->fname . ' ' . $user_notify->lname . "</strong> enrolled to your course";;
-                            $notification1->save();
-
-                            return  redirect()
-                                ->back()
-                                ->with('success', 'Congratualation!');
-                        } else {
-                            return  redirect()
-                                ->back()
-                                ->with('error', 'Failed to save data!!!');
-                        }
-                    }
-                }
-            }
+//            if ($user) {
+//
+//
+//                if (isset($request->rg_stdnt)) {
+//                    $data1 = '';
+//
+//                    foreach ($request->where_did_you_know_school_ as  $key => $val) {
+//                        if ($key == array_key_last($request->where_did_you_know_school_)) {
+//                            $data1 .= '' . $val;
+//                        } else {
+//                            $data1 .= '' . $val . ', ';
+//                        }
+//                    }
+//
+//                    $newStudentEnrollment = new StudentCourse();
+//
+//                    $newStudentEnrollment->student_id = $user->id;
+//
+//                    if (!empty($data1)) {
+//                        $newStudentEnrollment->where_did_you_know_school_ = $data1;
+//                    }
+//
+//                    if (!empty($request->school_id)) {
+//                        $newStudentEnrollment->school_id = $request->school_id;
+//                    }
+//
+//
+//
+//                    if (!empty($request->school_course_id)) {
+//                        $newStudentEnrollment->school_course_id = $request->school_course_id;
+//                    }
+//
+//
+//
+//                    if (!empty($request->driving_lto_requirement)) {
+//                        $newStudentEnrollment->driving_lto_requirement = $request->driving_lto_requirement;
+//                    }
+//
+//
+//                    if (!empty($request->theoretical_driving_course)) {
+//                        $newStudentEnrollment->theoretical_driving_course = $request->theoretical_driving_course;
+//                    }
+//
+//
+//
+//                    if (!empty($request->practical_driving_course_mv)) {
+//                        $newStudentEnrollment->practical_driving_course_mv = $request->practical_driving_course_mv;
+//                    }
+//
+//                    if (!empty($request->manual_transmission_mv)) {
+//                        $newStudentEnrollment->manual_transmission_mv = $request->manual_transmission_mv;
+//                    }
+//
+//
+//                    if (!empty($request->automatic_transmission_mv)) {
+//                        $newStudentEnrollment->automatic_transmission_mv = $request->automatic_transmission_mv;
+//                    }
+//
+//
+//                    if (!empty($request->practical_driving_course_mc)) {
+//                        $newStudentEnrollment->practical_driving_course_mc = $request->practical_driving_course_mc;
+//                    }
+//
+//                    if (!empty($request->manual_transmission_mc)) {
+//                        $newStudentEnrollment->manual_transmission_mc = $request->manual_transmission_mc;
+//                    }
+//
+//
+//                    if (!empty($request->automatic_transmission_mc)) {
+//                        $newStudentEnrollment->automatic_transmission_mc = $request->automatic_transmission_mc;
+//                    }
+//
+//                    if (!empty($request->automatic_transmission_mc)) {
+//                        $newStudentEnrollment->others_mc = $request->others_mc;
+//                    }
+//
+//
+//                    if (!empty($data1)) {
+//                        $newStudentEnrollment->where_did_you_know_school_ = $data1;
+//                    }
+//
+//
+//
+//
+//                    $is_save1 = $newStudentEnrollment->save();
+//
+//
+//
+//                    if ($is_save1) {
+//                        $newClass = new Classes();
+//                        $newClass->student_id = $user->id;
+//                        $newClass->school_id = $request->school_id;
+//                        $newClass->course_id = $request->course_id;
+//                        $is_save = $newClass->save();
+//
+//
+//                        if ($is_save) {
+//
+//                            $id = $user->id;
+//                            $existUser = User::find($id);
+//                            $existUser->enrollment_status = 1;
+//                            $existUser->save();
+//
+//
+//                            $notification = new Notification();
+//                            // $notification->image_id = $imagemodel->id;
+//                            $notification->user_id = $user->id;
+//                            $notification->status = 'active';
+//                            $notification->type = 'message';
+//                            $notification->message = "You are successfully enrolled you can go to your theoretical for more info.";
+//                            $notification->save();
+//
+//                            $user_notify = User::Where('id', '=', $user->id)->first();
+//
+//                            $notification1 = new Notification();
+//                            // $notification->image_id = $imagemodel->id;
+//                            $notification1->user_id = $request->instructor_id;
+//                            $notification1->status = 'active';
+//                            $notification1->type = 'message';
+//                            $notification1->message = "Student <strong>" . $user_notify->fname . ' ' . $user_notify->lname . "</strong> enrolled to your course";;
+//                            $notification1->save();
+//
+//                            return  redirect()
+//                                ->back()
+//                                ->with('success', 'Congratualation!');
+//                        } else {
+//                            return  redirect()
+//                                ->back()
+//                                ->with('error', 'Failed to save data!!!');
+//                        }
+//                    }
+//                }
+//            }
         }
         $fname = $request->fname;
         $lname = $request->lname;

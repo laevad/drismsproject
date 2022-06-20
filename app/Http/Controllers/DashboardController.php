@@ -46,7 +46,7 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index()
     {
@@ -98,12 +98,32 @@ class DashboardController extends Controller
         ])->get();
 
 
-        $student_info = Classes::select()->where("student_id", "=",  Auth::user()->id)->first();
+        $classStudent = Classes::select()->where("student_id", "=",  Auth::user()->id)->first();
 
-        // dd($student_info);
+//        student status
+        $studentCurrentEnroll = User::select('enrollment_status')->where("id", "=",  Auth::user()->id)->first();
+//         dd($studentCurrentEnroll->enrollment_status);
 
         // dd($student_certification);
-        return view('dashboard', compact('student_access_practical', 'student_info', 'instructor_evaluation', 'student_certification', 'cstudent', 'cschool', 'fleets', 'cstaff', 'cinstructor', 'cnew_student', 'notifications', 'profile_pic', 'branches', 'days', 'student_courses', 'classes', 'schools', 'courses', 'school_courses'));
+        return view('dashboard', compact(
+            'studentCurrentEnroll',
+            'student_access_practical',
+            'classStudent',
+            'instructor_evaluation',
+            'student_certification',
+            'cstudent', 'cschool',
+            'fleets', 'cstaff',
+            'cinstructor',
+            'cnew_student',
+            'notifications',
+            'profile_pic',
+            'branches',
+            'days',
+            'student_courses',
+            'classes',
+            'schools',
+            'courses',
+            'school_courses'));
     }
 
     /**
