@@ -182,13 +182,20 @@ class StudentController extends Controller
 
     public function schedule(){
 
-         $student_access_practical = StudentCourse::where([
+         $student_access_theoretical = StudentCourse::where([
             ['status', '=', 'completed'],
             ['evaluation', '=', 'pass'],
             ['student_id', '=', Auth::user()->id],
         ])->get();
 
-        return view('classes/index', compact('student_access_practical'));
+        $student_access_practical = FleetSchedule::where([
+            ['status', '=', 'completed'],
+            ['evaluation', '=', 'pass'],
+            ['student_id', '=', Auth::user()->id],
+        ])->get();
+
+//        dd($student_access_practical);
+        return view('classes/index', compact('student_access_theoretical','student_access_practical'));
     }
     /**
      * Store a newly created resource in storage.

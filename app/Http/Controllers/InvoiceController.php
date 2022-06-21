@@ -24,14 +24,14 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { 
+    {
 
 
-        
+
         //dd($invoiceAmount[0]->total_amount);
 
 
-        // $invoiceAmount = Invoice::join('courses as c', 'c.id', '=', 'invoices.course_id') 
+        // $invoiceAmount = Invoice::join('courses as c', 'c.id', '=', 'invoices.course_id')
         //                 ->where('invoices.user_id', 14)
         //                 ->get(['c.*', DB::raw('SUM(invoices.amount) as total_amount')]);
             // $winners = DB::table('invoices')
@@ -45,39 +45,39 @@ class InvoiceController extends Controller
         //                 ->get(['u.*', 'i.name as image_name', 'c.*']);
 
 
-                        
+
     // $invoices = DB::table('invoices')
     //             ->select('*', 'courses.*', 'courses.name as course_name', 'i.name as image_name', DB::raw('SUM(invoices.amount) As total_amount'))
     //             ->join('courses', 'courses.id', '=', 'invoices.course_id')
-    //             ->join('users as u', 'u.id', '=', 'invoices.user_id') 
-    //             ->join('images as i', 'i.id', '=', 'u.id') 
+    //             ->join('users as u', 'u.id', '=', 'invoices.user_id')
+    //             ->join('images as i', 'i.id', '=', 'u.id')
     //             ->groupBy('invoices.user_id')
     //             ->get();
 
-                      
+
         $invoices = DB::table('invoices')
                     ->select('*', 'invoices.user_id as user_id', 'invoices.course_id as course_id',  'courses.*', 'courses.name as course_name' , 'i.name as image_name' , DB::raw('SUM(invoices.amount) As total_amount'))
-                    ->join('courses', 'courses.id', '=', 'invoices.course_id')  
-                    ->join('users as u', 'u.id', '=', 'invoices.user_id') 
-                    ->leftJoin('images as i', 'i.id', '=', 'u.id') 
-                    ->groupBy('invoices.user_id')  
-                    ->groupBy('invoices.course_id')   
-                    ->get();   
- 
- 
+                    ->join('courses', 'courses.id', '=', 'invoices.course_id')
+                    ->join('users as u', 'u.id', '=', 'invoices.user_id')
+                    ->leftJoin('images as i', 'i.id', '=', 'u.id')
+                    ->groupBy('invoices.user_id')
+                    ->groupBy('invoices.course_id')->orderBy('invoices.created_at', 'desc')
+                    ->get();
+
+
 
 
         $profile_pic = User::join('images', 'users.id', '=', 'images.user_id')
         ->where('users.id', Auth::user()->id)
         ->get(['users.*', 'images.name as image_name']);
 
-        $permission = Permission::where('staff_id', '=', Auth::user()->id)->first(); 
+        $permission = Permission::where('staff_id', '=', Auth::user()->id)->first();
 
         $permission_status = "";
         if($permission) {
             if($permission->invoice == "read_only") {
                 $permission_status = "disabled";
-            } 
+            }
         }
 
 
@@ -92,18 +92,18 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { 
+    {
 
         $invoiceAmount = Invoice::where('user_id', $request->student_id)->sum('amount');
-        $courseAmount = Course::leftJoin('invoices as i', 'i.course_id', '=', 'courses.id') 
-                                ->first(['courses.price']); 
- 
+        $courseAmount = Course::leftJoin('invoices as i', 'i.course_id', '=', 'courses.id')
+                                ->first(['courses.price']);
+
         $total =  intval($courseAmount->price) - intval($invoiceAmount);
- 
- 
-        if($invoiceAmount > $courseAmount->price || $total > $courseAmount->price || $request->amount > $courseAmount->price){ 
-            return redirect()->back()->with('error', 'Failed to add payment.');    
-        }else{ 
+
+
+        if($invoiceAmount > $courseAmount->price || $total > $courseAmount->price || $request->amount > $courseAmount->price){
+            return redirect()->back()->with('error', 'Failed to add payment.');
+        }else{
 
             $newInvoice = new Invoice();
             $newInvoice->user_id = $request->student_id;
@@ -113,8 +113,8 @@ class InvoiceController extends Controller
             $is_save = $newInvoice->save();
 
             if($is_save){
- 
-                $user = User::Where('id', '=', $request->student_id)->first(); 
+
+                $user = User::Where('id', '=', $request->student_id)->first();
                 $notification = new Notification();
                 // $notification->image_id = $imagemodel->id;
                 $notification->user_id = $request->student_id;
@@ -122,56 +122,56 @@ class InvoiceController extends Controller
                 $notification->type = 'payment';
                 $notification->message = "We've received your $notification->type ($request->amount) Pesos <strong>" . $user->fname . ' '. $user->lname. "</strong>.";
                 $notification->save();
- 
-                return redirect()->back()->with('success', 'successfully add payment.');   
-            }else{ 
-                return redirect()->back()->with('error', 'Failed to add payment.');    
+
+                return redirect()->back()->with('success', 'successfully add payment.');
+            }else{
+                return redirect()->back()->with('error', 'Failed to add payment.');
             }
-        } 
+        }
     }
 
-    public function addPayment(Request $request){ 
+    public function addPayment(Request $request){
 
         $newInvoice = new Invoice();
         $newInvoice->user_id = $request->student_id;
         $newInvoice->course_id = $request->course_id;
         $newInvoice->amount = $request->amount;
         $newInvoice->method = $request->method;
-        $is_save = $newInvoice->save(); 
+        $is_save = $newInvoice->save();
 
         if($is_save){
- 
-            $user = User::Where('id', '=', $request->student_id)->first(); 
+
+            $user = User::Where('id', '=', $request->student_id)->first();
             $notification = new Notification();
             // $notification->image_id = $imagemodel->id;
             $notification->user_id = $request->student_id;
             $notification->status = 'active';
             $notification->type = 'payment';
             $notification->message = "We've update your $notification->type ($request->amount) Pesos <strong>  $user->fname $user->lname </strong>.";
-            $notification->save();  
- 
-            
-            return redirect()->back()->with('success', 'successfully add payment.');   
-        }else{ 
-            return redirect()->back()->with('error', 'Failed to add payment.');    
+            $notification->save();
+
+
+            return redirect()->back()->with('success', 'successfully add payment.');
+        }else{
+            return redirect()->back()->with('error', 'Failed to add payment.');
         }
     }
 
     public function paymentPrint($id){
 
 
-        
+
     $invoices = DB::table('invoices')
             ->select('*', 'invoices.user_id as user_id', 'invoices.course_id as course_id',  'courses.*', 'courses.name as course_name' , 'i.name as image_name' , DB::raw('SUM(invoices.amount) As total_amount'))
-            ->join('courses', 'courses.id', '=', 'invoices.course_id')  
-            ->join('users as u', 'u.id', '=', 'invoices.user_id') 
-            ->leftJoin('images as i', 'i.id', '=', 'u.id') 
-            ->groupBy('invoices.user_id')  
-            ->groupBy('invoices.course_id')   
+            ->join('courses', 'courses.id', '=', 'invoices.course_id')
+            ->join('users as u', 'u.id', '=', 'invoices.user_id')
+            ->leftJoin('images as i', 'i.id', '=', 'u.id')
+            ->groupBy('invoices.user_id')
+            ->groupBy('invoices.course_id')
             ->where('invoices.user_id', '=', $id)
-            ->get();    
+            ->get();
 
- 
+
         return view('print/payment', compact('invoices'));
     }
 

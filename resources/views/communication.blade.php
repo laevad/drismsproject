@@ -54,7 +54,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Receiver Users</th>
-                                    <th>Status + Date</th>
+{{--                                    <th>Status + Date</th>--}}
                                     <th>Message</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -128,7 +128,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Receiver branches</th>
-                                    <th>Status + Date</th>
+{{--                                    <th>Status + Date</th>--}}
                                     <th>Message</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -189,7 +189,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Receiver schools</th>
-                                    <th>Status + Date</th>
+{{--                                    <th>Status + Date</th>--}}
                                     <th>Message</th>
                                     <th class="text-center">Action</th>
                                 </tr>

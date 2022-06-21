@@ -34,7 +34,7 @@
         </div>
     @endif
 
-
+    <div class="alert alert-danger">NOTE: REGISTRATION FEE OF P3000 IS NON-REFUNDABLE</div>
     <div class="row">
         <div class="col-md-12">
                 <table class="table table-striped">
@@ -75,7 +75,8 @@
                                         <td>{{ $val->end }}</td>
                                         <td>{{ $val->day }}</td>
                                         <td>{{ $val->duration }} {{ $val->period }}</td>
-                                        <td>  <input type="submit" value="Register" class="btn btn-primary " @if(empty($single_fleet)) disabled @endif> </td>
+                                        <td>  <input type="submit" value="Register" class="btn btn-primary " > </td>
+{{--                                        @if(empty($single_fleet)) disabled @endif--}}
                                     </tr>
 
                             </form>

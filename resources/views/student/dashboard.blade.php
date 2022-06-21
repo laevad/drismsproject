@@ -31,13 +31,13 @@
             <div class="card widget" id="theoretical">
                 <a href="{{ route('schedule.theoretical')}}" class="
             @if(Auth::user()->role == 'Instructor' )
-                @else @if($studentCurrentEnroll->enrollment_status==1)
+                @else @if($student_access_theoretical->isEmpty())
                 @else disabled  @endif  @endif
             ">
-                    <div class="widget-icon @if(Auth::user()->role == 'Instructor' ) widget-success  @else @if($studentCurrentEnroll->enrollment_status==1)  widget-success @else bg-gray @endif @endif">
+                    <div class="widget-icon @if(Auth::user()->role == 'Instructor' ) widget-success  @else @if($student_access_theoretical->isEmpty())  widget-success @else bg-gray @endif @endif">
                         <i class="mdi mdi-blur-radial"></i>
                     </div>
-                    <div class="@if(Auth::user()->role == 'Instructor' ) widget-title  @else @if($studentCurrentEnroll->enrollment_status==1)  widget-title  @else bg-gray @endif  @endif">
+                    <div class="@if(Auth::user()->role == 'Instructor' ) widget-title  @else @if($student_access_theoretical->isEmpty())  widget-title  @else bg-gray @endif  @endif">
                         <h2>Theoretical</h2>
                         <p>School Schedule</p>
                     </div>
@@ -51,13 +51,13 @@
             <div class="card widget" id="practical">
                 <a href="{{ route('schedule.practical')}}" class="
                 @if(Auth::user()->role == 'Instructor' )
-                @else @if($studentCurrentEnroll->enrollment_status==1)
+                @else @if($student_access_practical->isEmpty())
                 @else disabled  @endif  @endif
                 "    >
-                    <div class="widget-icon @if(Auth::user()->role == 'Instructor' ) widget-danger  @else @if($studentCurrentEnroll->enrollment_status==1)  widget-danger @else bg-gray @endif @endif">
+                    <div class="widget-icon @if(Auth::user()->role == 'Instructor' ) widget-danger  @else @if($student_access_practical->isEmpty())  widget-danger @else bg-gray @endif @endif">
                         <i class="mdi mdi-car-connected"></i>
                     </div>
-                    <div class=" @if(Auth::user()->role == 'Instructor' ) widget-title  @else @if($studentCurrentEnroll->enrollment_status==1)  widget-title  @else bg-gray @endif  @endif ">
+                    <div class=" @if(Auth::user()->role == 'Instructor' ) widget-title  @else @if($student_access_practical->isEmpty())  widget-title  @else bg-gray @endif  @endif ">
 
                         <h2>Practical</h2>
                         <p>Fleet Schedule</p>

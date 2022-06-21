@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dashboard;
+use App\FleetSchedule;
 use App\User;
 use App\Image;
 use App\Notification;
@@ -91,7 +92,14 @@ class DashboardController extends Controller
             ->where('sc.status', '=', 'completed')
             ->get(['sc.status as sc_status', 'fs.status as fs_status', 'users.*']);
 
-        $student_access_practical = StudentCourse::where([
+//        dd($school_courses);
+        $student_access_theoretical = StudentCourse::where([
+            ['status', '=', 'completed'],
+            ['evaluation', '=', 'pass'],
+            ['student_id', '=', Auth::user()->id],
+        ])->get();
+
+        $student_access_practical = FleetSchedule::where([
             ['status', '=', 'completed'],
             ['evaluation', '=', 'pass'],
             ['student_id', '=', Auth::user()->id],
@@ -99,6 +107,8 @@ class DashboardController extends Controller
 
 
         $classStudent = Classes::select()->where("student_id", "=",  Auth::user()->id)->first();
+        $classPracticalStudent = Classes::select('course_id')->where("student_id", "=",  Auth::user()->id)->first();
+
 
 //        student status
         $studentCurrentEnroll = User::select('enrollment_status')->where("id", "=",  Auth::user()->id)->first();
@@ -106,6 +116,8 @@ class DashboardController extends Controller
 
         // dd($student_certification);
         return view('dashboard', compact(
+            'student_access_theoretical',
+            'classPracticalStudent',
             'studentCurrentEnroll',
             'student_access_practical',
             'classStudent',

@@ -27,7 +27,7 @@
                 <div class="card widget" id="theoretical">
 
 
-                    <a href="{{ route('student.scheduling.theoretical') }}"  class="btn btn-success btn-icon pull-right @if($student_access_practical->isEmpty())  @else disabled  @endif"
+                    <a href="{{ route('student.scheduling.theoretical') }}"  class="btn btn-success btn-icon pull-right @if($student_access_theoretical->isEmpty())  @else disabled  @endif"
                        style="color: white">
                         <i class="mdi mdi-blur-radial"></i>
                         Theoretical

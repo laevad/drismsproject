@@ -112,12 +112,21 @@ class ScheduleController extends Controller
 //        dd($request->evaluation);
         $exists = StudentCourse::find($id);
 
+        $std_id = StudentCourse::select("student_id")->where("id", "=", $id)->first();
+
+        $user = User::find($std_id->student_id);
+
+//        dd($request->evaluation);
         if($exists){
             if ($request->evaluation =='pass'){
                 $exists->status = 'completed';
                 $exists->evaluation = $request->evaluation;
                 $is_save = $exists->save();
                 if($is_save){
+
+
+                    $user->enrollment_status = null;
+                    $user->save();
                     $notification = new Notification();
                     // $notification->image_id = $imagemodel->id;
                     $notification->user_id = $exists->student_id;
@@ -138,6 +147,8 @@ class ScheduleController extends Controller
                 $exists->evaluation = $request->evaluation;
                 $is_save = $exists->save();
                 if($is_save){
+                    $user->enrollment_status = null;
+                    $user->save();
                     $notification = new Notification();
                     // $notification->image_id = $imagemodel->id;
                     $notification->user_id = $exists->student_id;
