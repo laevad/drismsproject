@@ -37,7 +37,7 @@
                     <td>{{ $fleet_schedule->make }} {{ $fleet_schedule->model }}</td>
                     <td>{{ $fleet_schedule->model_year }} </td>
                     <td>{{ $fleet_schedule->car_no }} </td>
-                    <td>{{ $fleet_schedule->time_start }} : {{ $fleet_schedule->time_start }}</td>
+                    <td>  {{ date('h:i:s a', strtotime($fleet_schedule->time_start)) }} : {{ date('h:i:s a', strtotime($fleet_schedule->time_end)) }}</td>
 {{--                    <td>{{ $fleet_schedule->start }} </td>--}}
 {{--                    <td>{{ $fleet_schedule->end }} </td>--}}
                     <td>{{ $fleet_schedule->day }} </td>

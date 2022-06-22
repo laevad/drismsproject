@@ -6,9 +6,9 @@
             <th>#</th>
             <th>Name</th>
             <th>Day</th>
-            <th>Start Time</th>
-            <th>Start Date</th>
-            <th>End Date</th>
+            <th>Time start and end</th>
+{{--            <th>Start Date</th>--}}
+{{--            <th>End Date</th>--}}
             <th>Duration</th>
             <th>Period</th>
             <th>Action</th>
@@ -19,9 +19,9 @@
                     <td>{{ $key+1 }}</td>
                     <td>{{ $val->fname}} {{ $val->lname}} </td>
                     <td>{{ $val->day}}  </td>
-                    <td>{{ $val->time_start_end}}  </td>
-                    <td>{{ $val->start}}  </td>
-                    <td>{{ $val->end}}  </td>
+                    <td>  {{ date('h:i:s a', strtotime($val->time_start)) }} : {{ date('h:i:s a', strtotime($val->time_end)) }}</td>
+{{--                    <td>{{ $val->start}}  </td>--}}
+{{--                    <td>{{ $val->end}}  </td>--}}
                     <td>{{ $val->duration}}  </td>
                     <td>{{ $val->period}}  </td>
 

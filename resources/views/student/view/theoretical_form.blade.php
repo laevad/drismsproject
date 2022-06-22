@@ -4,7 +4,7 @@
             <th scope="col">Select</th>
             <th scope="col">Course Name</th>
             <th scope="col">Instructor</th>
-            <th scope="col">Hourly</th>
+            <th scope="col">Time start and end</th>
             <th scope="col">Day</th>
 {{--            <th scope="col">Date Start</th>--}}
 {{--            <th scope="col">Date End</th>--}}
@@ -24,7 +24,7 @@
                                 <td>{{ $course->name }}</td>
 
                                 <td>@foreach($users as $user)@if($user->id == $sc->instructor_id) {{ $user->fname }} {{ $user->lname }} @endif @endforeach</td>
-                                <td>{{ $sc->time_start }} : {{ $sc->time_start }}</td>
+                                <td>{{ date('h:i:s a', strtotime($sc->time_start)) }} : {{ date('h:i:s a', strtotime($sc->time_end)) }}</td>
                                 <td>
                                     @forelse($days as $day)
                                         @if($sc->id == $day->sc_id)

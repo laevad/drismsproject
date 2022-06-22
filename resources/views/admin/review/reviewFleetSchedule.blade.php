@@ -54,7 +54,7 @@
                             {{ $val->model }}
                         </td>
                         <td>{{ $val->model_year }}</td>
-                        <td>{{ $val->time_start }} : {{ $val->time_start }}</td>
+                        <td>{{ date('h:i:s a', strtotime($val->time_start)) }} : {{ date('h:i:s a', strtotime($val->time_end)) }}</td>
 {{--                        <td>{{ $val->start }}</td>--}}
 {{--                        <td>{{ $val->end }}</td>--}}
                         <td>{{ $val->day }}</td>

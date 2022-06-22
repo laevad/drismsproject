@@ -70,7 +70,7 @@
                                         <td>{{ $val->model }}</td>
                                         <td>{{ $val->car_no }}</td>
                                         <td>{{ $val->car_plate }}</td>
-                                        <td>{{ $val->time_start }} - {{ $val->time_end }}</td>
+                                        <td>  {{ date('h:i:s a', strtotime($val->time_start)) }} : {{ date('h:i:s a', strtotime($val->time_end)) }}</td>
 {{--                                        <td>{{ $val->start }}</td>--}}
 {{--                                        <td>{{ $val->end }}</td>--}}
 {{--                                        <td>{{ $val->day }}</td>--}}
