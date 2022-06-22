@@ -112,12 +112,21 @@ class ScheduleController extends Controller
 //        dd($request->evaluation);
         $exists = StudentCourse::find($id);
 
+        $std_id = StudentCourse::select("student_id")->where("id", "=", $id)->first();
+
+        $user = User::find($std_id->student_id);
+
+//        dd($request->evaluation);
         if($exists){
             if ($request->evaluation =='pass'){
                 $exists->status = 'completed';
                 $exists->evaluation = $request->evaluation;
                 $is_save = $exists->save();
                 if($is_save){
+
+
+                    $user->enrollment_status = null;
+                    $user->save();
                     $notification = new Notification();
                     // $notification->image_id = $imagemodel->id;
                     $notification->user_id = $exists->student_id;
@@ -138,6 +147,8 @@ class ScheduleController extends Controller
                 $exists->evaluation = $request->evaluation;
                 $is_save = $exists->save();
                 if($is_save){
+                    $user->enrollment_status = null;
+                    $user->save();
                     $notification = new Notification();
                     // $notification->image_id = $imagemodel->id;
                     $notification->user_id = $exists->student_id;
@@ -168,7 +179,7 @@ class ScheduleController extends Controller
                         ->where('fleet_schedules.student_id', '=', Auth::user()->id )
                         ->first(['u.*', 'f.*', 'fleet_schedules.*']);
 
-
+//            dd(!empty($fleet_schedule));
             $instructor_fleet_schedule = FleetSchedule::join('users as u', 'u.id', '=', 'fleet_schedules.student_id')
                         ->join('fleet as f', 'f.id', '=', 'fleet_schedules.fleet_id')
                         ->where('fleet_schedules.instructor_id', '=', Auth::user()->id )
@@ -184,50 +195,114 @@ class ScheduleController extends Controller
     public function instructorPracticalUpdateStudent(Request $request, $id){
 
         $exists = FleetSchedule::find($id);
-
+        $std_id = StudentCourse::select("student_id")->where("id", "=", $id)->first();
+//        dd($exists->student_id);
+        $user = User::find($exists->student_id);
         if($exists){
+            if($request->evaluation == 'pass'){
+                $user->enrollment_status = null;
+                $user->save();
+                $notification = new Notification();
+                // $notification->image_id = $imagemodel->id;
+                $notification->user_id = $exists->student_id;
+                $notification->status = 'active';
+                $notification->type = 'message';
+                $notification->message = "You successfully pass the Practical";
+                $notification->save();
+                date_default_timezone_set('Asia/Manila');
 
-            date_default_timezone_set('Asia/Manila');
-
-            // echo date('M-d-y') . ' at '. date('h:i:sa');
-
-
-            $words1 = preg_split('//', 'abcdefghijklmnopqrstuvwxyz0123456789', -1);
-
-            shuffle($words1);
-
-            $words2 = preg_split('//', 'abcdefghijklmnopqrstuvwxyz0123456789', -1);
-
-            shuffle($words2);
-
-            $str1="";
-            $str2="";
-            $str3="";
-            for($i = 0; $i < 5; $i++) {
-                $str1 .= strtoupper($words1[$i]);
-                $str2 .= strtoupper($words2[$i]);
-            }
-
-            for($i = 0; $i < 10; $i++) {
-                $str3 .= strtoupper($words1[$i]);
-            }
-            $exists->driver_license_no = 'DRISMS-'.$str1 .'-' .$str2;
-            $exists->control_no = 'DS-'.$str3. '-'. substr(date('M'), 0, 1). '-'.date('Y'). '-'.  $id;
-            $exists->date_issue = date('M-d-y') . ' at '. date('h:i:sa');
-            $exists->status = 'completed';
-            $exists->evaluation = $request->evaluation;
-            $is_save = $exists->save();
+                // echo date('M-d-y') . ' at '. date('h:i:sa');
 
 
-            if($is_save){
-                return  redirect()
+                $words1 = preg_split('//', 'abcdefghijklmnopqrstuvwxyz0123456789', -1);
+
+                shuffle($words1);
+
+                $words2 = preg_split('//', 'abcdefghijklmnopqrstuvwxyz0123456789', -1);
+
+                shuffle($words2);
+
+                $str1="";
+                $str2="";
+                $str3="";
+                for($i = 0; $i < 5; $i++) {
+                    $str1 .= strtoupper($words1[$i]);
+                    $str2 .= strtoupper($words2[$i]);
+                }
+
+                for($i = 0; $i < 10; $i++) {
+                    $str3 .= strtoupper($words1[$i]);
+                }
+                $exists->driver_license_no = 'DRISMS-'.$str1 .'-' .$str2;
+                $exists->control_no = 'DS-'.$str3. '-'. substr(date('M'), 0, 1). '-'.date('Y'). '-'.  $id;
+                $exists->date_issue = date('M-d-y') . ' at '. date('h:i:sa');
+                $exists->status = 'completed';
+                $exists->evaluation = $request->evaluation;
+                $is_save = $exists->save();
+
+
+                if($is_save){
+                    return  redirect()
                         ->back()
                         ->with('success', 'Successfully evaluate the student!');
-            }else{
-                return  redirect()
+                }else{
+                    return  redirect()
                         ->back()
                         ->with('error', 'Failed to evaluate the student!');
-            }
+                }
+            }else if($request->evaluation == 'failed'){
+                    $user->enrollment_status = null;
+                    $user->save();
+                    $notification = new Notification();
+                    // $notification->image_id = $imagemodel->id;
+                    $notification->user_id = $exists->student_id;
+                    $notification->status = 'active';
+                    $notification->type = 'message';
+                    $notification->message = "You failed the Practical";
+                    $notification->save();
+                    date_default_timezone_set('Asia/Manila');
+
+                    // echo date('M-d-y') . ' at '. date('h:i:sa');
+
+
+                    $words1 = preg_split('//', 'abcdefghijklmnopqrstuvwxyz0123456789', -1);
+
+                    shuffle($words1);
+
+                    $words2 = preg_split('//', 'abcdefghijklmnopqrstuvwxyz0123456789', -1);
+
+                    shuffle($words2);
+
+                    $str1="";
+                    $str2="";
+                    $str3="";
+                    for($i = 0; $i < 5; $i++) {
+                        $str1 .= strtoupper($words1[$i]);
+                        $str2 .= strtoupper($words2[$i]);
+                    }
+
+                    for($i = 0; $i < 10; $i++) {
+                        $str3 .= strtoupper($words1[$i]);
+                    }
+                    $exists->driver_license_no = 'DRISMS-'.$str1 .'-' .$str2;
+                    $exists->control_no = 'DS-'.$str3. '-'. substr(date('M'), 0, 1). '-'.date('Y'). '-'.  $id;
+                    $exists->date_issue = date('M-d-y') . ' at '. date('h:i:sa');
+                    $exists->status = 'completed';
+                    $exists->evaluation = $request->evaluation;
+                    $is_save = $exists->save();
+
+
+                    if($is_save){
+                        return  redirect()
+                            ->back()
+                            ->with('success', 'Successfully evaluate the student!');
+                    }else{
+                        return  redirect()
+                            ->back()
+                            ->with('error', 'Failed to evaluate the student!');
+                    }
+                }
+
         }
     }
     /**

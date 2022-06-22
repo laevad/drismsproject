@@ -43,17 +43,18 @@ class CommunicationController extends Controller
         $receiver_users = User::join('communication_user_school_branches as cusb', 'users.id', '=', 'cusb.user_receiver_id')
             ->join('communications as c', 'c.id', '=', 'cusb.comm_id')
             ->leftJoin('images as i', 'users.id', '=', 'i.user_id')
-            ->orderBy('cusb.created_at', 'DESC')
+            ->orderBy('cusb.created_at', 'DESC')->orderBy('c.created_at', 'desc')
             ->get(['users.*', 'cusb.*', 'cusb.id as cusb_id', 'c.*', 'i.name as image_name']);
 
         $branch_users = Branch::join('communication_user_school_branches as cusb', 'branches.id', '=', 'cusb.branch_receiver_id')
             ->join('communications as c', 'c.id', '=', 'cusb.comm_id')
-            ->orderBy('cusb.created_at', 'DESC')
+            ->orderBy('cusb.created_at', 'DESC')->orderBy('c.created_at', 'desc')
             ->get(['branches.*', 'cusb.*', 'cusb.id as cusb_id', 'c.*']);
 
         $school_users = School::join('communication_user_school_branches as cusb', 'schools.id', '=', 'cusb.school_receiver_id')
             ->join('communications as c', 'c.id', '=', 'cusb.comm_id')
             ->orderBy('cusb.created_at', 'DESC')
+            ->orderBy('c.created_at', 'desc')
             ->get(['schools.*', 'cusb.*', 'cusb.id as cusb_id', 'c.*']);
 
 

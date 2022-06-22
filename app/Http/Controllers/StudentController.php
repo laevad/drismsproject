@@ -160,8 +160,17 @@ class StudentController extends Controller
             $courses = Course::all();
             $school_courses =SchoolCourse::all();
             $days =Day::all();
+            $users =  User::all();
 
-        return view('student/schedule_theoretical', compact('schools', 'branches', 'school_courses', 'courses', 'days'));
+        return view('student/schedule_theoretical', compact(
+            'users',
+            'schools',
+            'branches',
+            'school_courses',
+            'courses',
+            'days'
+            )
+        );
     }
 
 
@@ -175,6 +184,7 @@ class StudentController extends Controller
 
 
         $single_fleet = FleetSchedule::where('student_id', '=', Auth::user()->id)->first();
+//        dd(!empty($single_fleet) && Auth::user()->enrollment_status == null);
 
         return view('student/schedule_practical', compact('fleet_schedules', 'single_fleet'));
     }
@@ -182,13 +192,20 @@ class StudentController extends Controller
 
     public function schedule(){
 
-         $student_access_practical = StudentCourse::where([
+         $student_access_theoretical = StudentCourse::where([
             ['status', '=', 'completed'],
             ['evaluation', '=', 'pass'],
             ['student_id', '=', Auth::user()->id],
         ])->get();
 
-        return view('classes/index', compact('student_access_practical'));
+        $student_access_practical = FleetSchedule::where([
+            ['status', '=', 'completed'],
+            ['evaluation', '=', 'pass'],
+            ['student_id', '=', Auth::user()->id],
+        ])->get();
+
+//        dd($student_access_theoretical);
+        return view('classes/index', compact('student_access_theoretical','student_access_practical'));
     }
     /**
      * Store a newly created resource in storage.

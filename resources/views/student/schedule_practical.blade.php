@@ -34,7 +34,7 @@
         </div>
     @endif
 
-
+    <div class="alert alert-danger">NOTE: REGISTRATION FEE OF P3000 IS NON-REFUNDABLE</div>
     <div class="row">
         <div class="col-md-12">
                 <table class="table table-striped">
@@ -47,10 +47,10 @@
                             <th scope="col">Car Number</th>
                             <th scope="col">Car Plate</th>
                             <th scope="col">Time Start & End</th>
-                            <th scope="col">Date Start</th>
-                            <th scope="col">Date End</th>
-                            <th scope="col">Days</th>
-                            <th scope="col">Duration & Period</th>
+{{--                            <th scope="col">Date Start</th>--}}
+{{--                            <th scope="col">Date End</th>--}}
+{{--                            <th scope="col">Days</th>--}}
+{{--                            <th scope="col">Duration & Period</th>--}}
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -70,12 +70,13 @@
                                         <td>{{ $val->model }}</td>
                                         <td>{{ $val->car_no }}</td>
                                         <td>{{ $val->car_plate }}</td>
-                                        <td>{{ $val->time_start_end }}</td>
-                                        <td>{{ $val->start }}</td>
-                                        <td>{{ $val->end }}</td>
-                                        <td>{{ $val->day }}</td>
+                                        <td>{{ $val->time_start }} - {{ $val->time_end }}</td>
+{{--                                        <td>{{ $val->start }}</td>--}}
+{{--                                        <td>{{ $val->end }}</td>--}}
+{{--                                        <td>{{ $val->day }}</td>--}}
                                         <td>{{ $val->duration }} {{ $val->period }}</td>
-                                        <td>  <input type="submit" value="Register" class="btn btn-primary " @if(empty($single_fleet)) disabled @endif> </td>
+                                        <td>  <input type="submit" value="Register" class="btn btn-primary  " @if( Auth::user()->enrollment_status != null ) disabled @endif  > </td>
+
                                     </tr>
 
                             </form>

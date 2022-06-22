@@ -21,6 +21,7 @@
             </button>
             <h3>Fleet</h3>
             <p>Vehicles for your branch</p>
+            <p>Vehicles for your branch</p>
         </div>
         <!-- page content -->
         <div class="row">

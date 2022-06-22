@@ -108,20 +108,20 @@
             </div>
 
 
-            <div class="form-group">
+{{--            <div class="form-group">--}}
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Start</label>
-                        <input type="date" name="start" class="form-control" required="" value="{{ $school_courses->start }}"/>
-                    </div>
-                    <div class="col-md-6">
-                        <label>End</label>
-                        <input type="date" name="end" class="form-control" required="" value="{{ $school_courses->end }}"/>
-                    </div>
+{{--                <div class="row">--}}
+{{--                    <div class="col-md-6">--}}
+{{--                        <label>Start</label>--}}
+{{--                        <input type="date" name="start" class="form-control" required="" value="{{ $school_courses->start }}"/>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-md-6">--}}
+{{--                        <label>End</label>--}}
+{{--                        <input type="date" name="end" class="form-control" required="" value="{{ $school_courses->end }}"/>--}}
+{{--                    </div>--}}
 
-                </div>
-            </div>
+{{--                </div>--}}
+{{--            </div>--}}
 
 
             <div class="form-group">

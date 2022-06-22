@@ -249,9 +249,12 @@ class FleetController extends Controller
         $exists = FleetSchedule::find($id);
         if($exists){
             $exists->student_id = $request->_student_id;
+            $user = User::find($request->_student_id);
+//            dd($user);
+            $user->enrollment_status = 1;
             $is_save = $exists->save();
             if($is_save){
-
+                $user->save();
                 $notification = new Notification();
                 // $notification->image_id = $imagemodel->id;
                 $notification->user_id = Auth::user()->id;
@@ -259,6 +262,8 @@ class FleetController extends Controller
                 $notification->type = 'message';
                 $notification->message = "You are successfully enrolled for Practical, you can go to your Dashboard Practical for more info.";
                 $notification->save();
+
+
 
 
 
