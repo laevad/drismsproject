@@ -61,6 +61,7 @@ Route::prefix('/course')->group(function () {
     Route::post('/store', 'CourseController@store')->name('course');
 });
 Route::get('invoice/print/{id}', 'InvoiceController@paymentPrint')->name('invoice.print');
+Route::get('invoice/print_practical/{id}', 'InvoiceController@paymentPrintPractical')->name('invoice.print_practical');
 Route::get('enrollment/form', 'EnrollmentController@enrollment')->name('enrollment.form');
 Route::get('/school/addCourse/{id}', 'SchoolController@addCourse')->name('school.course.add');
 Route::get('/school/editCourse/{id}', [SchoolController::class, 'show'])->name('school.course.edit');

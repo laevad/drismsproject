@@ -1,16 +1,16 @@
-@extends('layouts.header') 
-@section('content')     
-        <!-- Admin home page --> 
-        <!-- sidebar --> 
-   
- 
+@extends('layouts.header')
+@section('content')
+        <!-- Admin home page -->
+        <!-- sidebar -->
+
+
   <style>
     @media print
     {
         #non-printable { display: none; }
-        #printable { 
-			display: block; 
-			
+        #printable {
+			display: block;
+
 		}
 		.print-body{
 			color:#000;
@@ -40,12 +40,12 @@
     h5{
         text-align: center;
     }
-	
+
   </style>
 
 
 <div class="print-body">
-    
+
 
 
     @forelse($invoices as $invoice)
@@ -67,15 +67,16 @@
 					</ul>
 				</div>
 
-				<div class="col-md-6 col-sm-6 text-right">
-					<h4><strong>Payment</strong> Details</h4>
-					<ul class="list-unstyled">
-						<li><strong>Account Number:</strong> {{ $invoice->id }}</li>
-						<li><strong>Account Username:</strong> {{ $invoice->username }}</li>
-						
-					</ul>
 
-				</div>
+{{--				<div class="col-md-6 col-sm-6 text-right">--}}
+{{--				--}}
+{{--					<ul class="list-unstyled">--}}
+{{--						<li><strong>Account Number:</strong> {{ $invoice->id }}</li>--}}
+{{--						<li><strong>Account Username:</strong> {{ $invoice->username }}</li>--}}
+
+{{--					</ul>--}}
+
+{{--				</div>--}}
 
 			</div>
 
@@ -100,7 +101,7 @@
 							<td>{{ $invoice->updated_at }}</td>
 							<td>{{ $invoice->price }}</td>
 						</tr>
-						
+
 					</tbody>
 				</table>
 			</div>
@@ -110,12 +111,12 @@
 				<div class="col-sm-6 text-left">
 					<h4><strong>Contact Details </strong> </h4>
 					<p class="nomargin nopadding">
-						<strong></strong> 
-						
+						<strong></strong>
+
 					</p><br><!-- no P margin for printing - use <br> instead -->
 
 					<address>
-						
+
 						Lapasan, Cagayan de Oro City<br>
 						Phone: +63 9682095315 <br>
 						Fax: 1-800-565-2390 <br>
@@ -123,20 +124,35 @@
 					</address>
 				</div>
 
+
 				<div class="col-sm-6 text-right">
-                   
+                    <h4><strong>Payment</strong> Details</h4>
 					<ul class="list-unstyled">
+                        <li><strong>Full Tuition: </strong> 2000</li>
 						<li><strong>Partial Payment: </strong> {{ $invoice->amount }}</li>
 						<li><strong>Total:</strong> {{ $invoice->price }}</li>
-                        <li>Balance: </li>
-					</ul>     
-					
+						<li><strong>OR#:</strong> {{ $invoice->or_num }}</li>
+                        <li>Balance:  <strong>@php
+                                    $balance = 0;
+                                    $balance = ($invoice->total_amount) - ($invoice->price);
+                                @endphp
+                                @if($balance < 0)
+                                    <span class="">{{ $balance }}</span>
+                                @else
+                                    <span class="">{{ $balance }}</span>
+                                @endif</strong></li>
+
+					</ul>
+                    <ul class="list-unstyled">
+                        <li>Assisted by: <strong>{{ $invoice->assisted_by }}</strong></li>
+                    </ul>
+
 				</div>
 			</div>
 		</div>
 	</div>
 
-	
+
 </div>
 <div class="text-right">
         <button class="btn btn-primary" id="print-payment"> Print</button>
@@ -147,14 +163,14 @@
 
 </div>
 
-@include('../layouts/includes/footer') 
+@include('../layouts/includes/footer')
     <script>
         $(document).ready(function() {
- 
+
 
 
             $('#print-payment').on('click touchstart', function(e){
-                e.preventDefault(); 
+                e.preventDefault();
                 window.print();
             });
 

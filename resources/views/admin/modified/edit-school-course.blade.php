@@ -29,7 +29,7 @@
             </div>
         @endif
 
-        <form action="{{ route('school.course.update', $id)}}" method="post">
+        <form action="{{ route('school.course.update', $id)}}" method="post" oninput="cal()">
             @csrf
             <input type="hidden" value="{{$id}}" name="school_id"/>
 
@@ -38,11 +38,11 @@
 
                     <div class="col-md-3 form-group">
                         <label>Time Start</label>
-                        <input required type="time" class="form-control" name="time_start" value="{{ $school_courses->time_start }}">
+                        <input required type="time" class="form-control" id="time_start" name="time_start" value="{{ $school_courses->time_start }}">
                     </div>
                     <div class="col-md-3 form-group">
                         <label>Time end</label>
-                        <input required type="time" class="form-control" name="time_end" value="{{ $school_courses->time_end }}">
+                        <input required type="time" class="form-control" id="time_end" name="time_end" value="{{ $school_courses->time_end }}">
                     </div>
 
                     <div class="col-md-6">
@@ -128,7 +128,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label>Duration</label>
-                        <input type="number" name="duration" class="form-control" placeholder="Duration" required="" value="{{ $school_courses->duration }}">
+                        <input type="number" name="duration" class="form-control" id="duration" placeholder="Duration" required="" value="{{ $school_courses->duration }}">
                     </div>
 
                     <div class="col-md-6">

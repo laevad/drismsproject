@@ -12,6 +12,7 @@
     <div class="page-header">
 
     <a href="{{ route('school.course.add', $id) }}" class="btn btn-primary btn-icon pull-right ml-5 {{ $permission_status }}" >
+        
         <i class=" mdi mdi-plus-circle-outline" style="position: relative">
 
         </i>

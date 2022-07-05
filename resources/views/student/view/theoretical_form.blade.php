@@ -283,27 +283,27 @@
 
                                             <!--    </div> -->
                                             <!--</div>  -->
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <table class="table table-borderless form-drisms">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td> <label>Signature:</label></td>
-                                                                    <td><label>Assisted by: </label> </td>
-                                                                </tr>
-                                                                <tr>
-                                                                        <td class=""><hr></td>
-                                                                        <td class=""><hr></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+{{--                                            <div class="form-group">--}}
+{{--                                                <div class="row">--}}
+{{--                                                    <div class="col-md-12">--}}
+{{--                                                        <table class="table table-borderless form-drisms">--}}
+{{--                                                            <tbody>--}}
+{{--                                                                <tr>--}}
+{{--                                                                    <td> <label>Signature:</label></td>--}}
+{{--                                                                    <td><label>Assisted by: </label> </td>--}}
+{{--                                                                </tr>--}}
+{{--                                                                <tr>--}}
+{{--                                                                        <td class=""><hr></td>--}}
+{{--                                                                        <td class=""><hr></td>--}}
+{{--                                                                </tr>--}}
+{{--                                                            </tbody>--}}
+{{--                                                        </table>--}}
 
-                                                        <div class="alert alert-danger">NOTE: REGISTRATION FEE OF P2000 IS NON-REFUNDABLE</div>
-                                                    </div>
+{{--                                                        <div class="alert alert-danger">NOTE: REGISTRATION FEE OF P2000 IS NON-REFUNDABLE</div>--}}
+{{--                                                    </div>--}}
 
-                                                </div>
-                                            </div>
+{{--                                                </div>--}}
+{{--                                            </div>--}}
 
                                             <div class="form-group">
                                                 <div class="row">

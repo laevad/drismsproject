@@ -1,16 +1,16 @@
 
 @if($studentcourses)
-<div class="page-header evaluate-instructor">
-    <a href="{{ route('instructor.evaluation', ['theoretical', $studentcourses->student_course_id, $studentcourses->instructor_id]) }} " class="btn btn-success btn-icon pull-right">
-        <i class="mdi mdi-calendar-text"></i>
-        Evaluate Instructor
-    </a>
-</div>
+    <div class="page-header evaluate-instructor">
+        <a href="{{ route('instructor.evaluation', ['theoretical', $studentcourses->student_course_id, $studentcourses->instructor_id]) }} " class="btn btn-success btn-icon pull-right">
+            <i class="mdi mdi-calendar-text"></i>
+            Evaluate Instructor
+        </a>
+    </div>
 
 
-<div class="row">
-    <!-- students theoretical page -->
     <div class="row">
+        <!-- students theoretical page -->
+        <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -34,26 +34,26 @@
                                     <div class="col-md-12">
                                         <table class="table table-borderless form-drisms">
                                             <thead>
-                                                <th>Course</th>
-                                                <th>Price</th>
-                                                <th>Days</th>
-                                                <th>Time Start & End</th>
-{{--                                                <th>Start</th>--}}
-{{--                                                <th>End</th>--}}
-                                                <th>Duration</th>
-                                                <th>Period</th>
+                                            <th>Course</th>
+                                            <th>Price</th>
+                                            <th>Days</th>
+                                            <th>Time Start & End</th>
+                                            {{--                                                <th>Start</th>--}}
+                                            {{--                                                <th>End</th>--}}
+                                            <th>Duration</th>
+                                            <th>Period</th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td> {{ $studentcourses->c_name}} </td>
-                                                    <td> {{ $studentcourses->c_price}} </td>
-                                                    <td> {{ $studentcourses->day}} </td>
-                                                    <td> {{ $studentcourses->time_start}} - {{ $studentcourses->time_end }} </td>
-{{--                                                    <td> {{ $studentcourses->start}} </td>--}}
-{{--                                                    <td> {{ $studentcourses->end}} </td>--}}
-                                                    <td> {{ $studentcourses->duration }} </td>
-                                                    <td> {{ $studentcourses->period }} </td>
-                                                </tr>
+                                            <tr>
+                                                <td> {{ $studentcourses->c_name}} </td>
+                                                <td> {{ $studentcourses->c_price}} </td>
+                                                <td> {{ $studentcourses->day}} </td>
+                                                <td> {{ $studentcourses->time_start}} - {{ $studentcourses->time_end }} </td>
+                                                {{--                                                    <td> {{ $studentcourses->start}} </td>--}}
+                                                {{--                                                    <td> {{ $studentcourses->end}} </td>--}}
+                                                <td> {{ $studentcourses->duration }} </td>
+                                                <td> {{ $studentcourses->period }} </td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -61,41 +61,41 @@
                                     <div class="col-md-4">
                                         <table class="table table-borderless form-drisms">
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        {{ $studentcourses->driving_lto_requirement }}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ $studentcourses->theoretical_driving_course }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ $studentcourses->practical_driving_course_mv }} </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ $studentcourses->manual_transmission_mv }} </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ $studentcourses->automatic_transmission_mv }}</td>
-                                                </tr>
+                                            <tr>
+                                                <td>
+                                                    {{ $studentcourses->driving_lto_requirement }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ $studentcourses->theoretical_driving_course }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ $studentcourses->practical_driving_course_mv }} </td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ $studentcourses->manual_transmission_mv }} </td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ $studentcourses->automatic_transmission_mv }}</td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                     <div class="col-md-4">
                                         <table class="table table-borderless form-drisms">
                                             <tbody>
-                                                <tr>
-                                                    <td>{{ $studentcourses->practical_driving_course_mc }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ $studentcourses->manual_transmission_mc }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td> {{ $studentcourses->automatic_transmission_mc }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>OTHERS: {{ $studentcourses->others_mc }}</td>
-                                                </tr>
+                                            <tr>
+                                                <td>{{ $studentcourses->practical_driving_course_mc }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ $studentcourses->manual_transmission_mc }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td> {{ $studentcourses->automatic_transmission_mc }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>OTHERS: {{ $studentcourses->others_mc }}</td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -105,9 +105,9 @@
                                         </div>
                                         <table class="table table-borderless form-drisms">
                                             <tbody>
-                                                <tr>
-                                                    <td> {{ $studentcourses->where_did_you_know_school_ }} </td>
-                                                </tr>
+                                            <tr>
+                                                <td> {{ $studentcourses->where_did_you_know_school_ }} </td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -214,35 +214,35 @@
                                 <!--</div>-->
 
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <table class="table table-borderless form-drisms">
-                                            <tbody>
-                                                <tr>
-                                                    <td> <label>Signature: </label></td>
-                                                    <td><label>Assisted by: </label> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class=""><hr></td>
-                                                    <td class=""><hr></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <div class="alert alert-danger">NOTE: REGISTRATION FEE OF P2000 IS NON-REFUNDABLE</div>
-                                    </div>
-                                </div>
+{{--                                <div class="row">--}}
+{{--                                    <div class="col-md-12">--}}
+{{--                                        <table class="table table-borderless form-drisms">--}}
+{{--                                            <tbody>--}}
+{{--                                            <tr>--}}
+{{--                                                <td> <label>Signature: </label></td>--}}
+{{--                                                <td><label>Assisted by: </label> </td>--}}
+{{--                                            </tr>--}}
+{{--                                            <tr>--}}
+{{--                                                <td class=""><hr></td>--}}
+{{--                                                <td class=""><hr></td>--}}
+{{--                                            </tr>--}}
+{{--                                            </tbody>--}}
+{{--                                        </table>--}}
+{{--                                        <div class="alert alert-danger">NOTE: REGISTRATION FEE OF P2000 IS NON-REFUNDABLE</div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                </div>
-                <div class="col-md-6">
-                    <div class="student-growth-chart mt-15">
-                        <button class="btn btn-primary" id="student-enrollment-record">Print</button>
+                            </div>
+{{--                            <div class="col-md-6">--}}
+{{--                                <div class="student-growth-chart mt-15">--}}
+{{--                                    <button class="btn btn-primary" id="student-enrollment-record">Print</button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
 
 @else
     @include("admin/empty/empty")

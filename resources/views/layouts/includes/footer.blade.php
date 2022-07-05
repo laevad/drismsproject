@@ -2,6 +2,7 @@
 <div class="blockquote-footer">
     <p class="text-center text-black-50">&copy; {{ date("Y") }}  {{ env("APP_NAME") }}. All Rights Reserved.</p>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.3/dayjs.min.js" integrity="sha512-Ot7ArUEhJDU0cwoBNNnWe487kjL5wAOsIYig8llY/l0P2TUFwgsAHVmrZMHsT8NGo+HwkjTJsNErS6QqIkBxDw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ asset('js/components/popper.min.js') }}"></script>
 <script src="{{ asset('js/components/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('libs/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -9,7 +10,19 @@
 <script src="{{  asset('libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('js/components/simcify.min.js') }}"></script>
 <script src="{{ asset('js/components/app.js') }}"></script>
+
 <script>
+
+
+
+    function cal() {
+        let time_start = document.getElementById('time_start').value;
+        let split_time =  time_start.split(':');
+        // console.log(split_time)
+        let date = dayjs().set("hour", split_time[0]).set("minute", split_time[1]);
+        date = date.add(document.getElementById('duration').value, 'hour');
+        document.getElementById('time_end').value=date.format("HH:mm");
+    }
         $(document).ready(function(){
 
 

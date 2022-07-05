@@ -70,6 +70,11 @@ class StudentController extends Controller
                                         ->join('courses as c', 'c.id', '=', 'sc.course_id')
                                         ->get(['c.*', 'sc.*', 'student_course.*']);
 
+
+
+        $studentCoursePractical1 = FleetSchedule::all();
+//        dd($studentCoursePractical1);
+
         $permission = Permission::where('staff_id', '=', Auth::user()->id)->first();
 
         $permission_status = "";
@@ -80,13 +85,20 @@ class StudentController extends Controller
         }
 
 
-        return view('admin/students', compact('courses', 'students', 'profile_pic', 'invoiceAmount', 'permission_status', 'studentCourses'));
+        return view('admin/students', compact(
+            'courses',
+            'students',
+            'profile_pic',
+            'invoiceAmount',
+            'permission_status',
+            'studentCourses',
+        'studentCoursePractical1'));
     }
 
     /**
      * Search data from source storage
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
 
     public function search(Request $request){
@@ -120,6 +132,9 @@ class StudentController extends Controller
 
         $courses = Course::orderBy('created_at', 'DESC')->get();
 
+        $studentCoursePractical1 = User::join('fleet_schedules as fs', 'fs.student_id','=', 'users.id')
+            ->get(['fs.*']);
+
 
         //addeded from index
 
@@ -148,7 +163,14 @@ class StudentController extends Controller
             }
         }
 
-        return view('admin/students', compact('courses', 'students', 'profile_pic', 'invoiceAmount', 'permission_status', 'studentCourses'));
+        return view('admin/students', compact(
+            'studentCoursePractical1',
+            'courses',
+            'students',
+            'profile_pic',
+            'invoiceAmount',
+            'permission_status',
+            'studentCourses'));
     }
 
 

@@ -1,4 +1,3 @@
-
 @foreach($students as $student)
     <!-- modals -->
     <div class="modal right fade" id="create{{ $student->id }}" role="dialog">
@@ -7,39 +6,66 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="mdi mdi-close-circle-outline"></i></span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true"><i class="mdi mdi-close-circle-outline"></i></span></button>
                     <h4 class="modal-title" id="myModalLabel2">Update {{$student->fname }}</h4>
                 </div>
 
                 <div class="modal-body">
-                    <form action="{{ route('invoice.store')}}" method="POST" >
+                    <form action="{{ route('invoice.store')}}" method="POST">
                         @csrf
 
-                        <input type="hidden" class="form-control" placeholder="Amount Paid" value="{{$student->id}}" name="student_id">
+                        <input type="hidden" class="form-control" placeholder="Amount Paid" value="{{$student->id}}"
+                               name="student_id">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-12">
 
                                     <label>Course</label>
-                                    <select class="form-control select2" name="course_id" required="">
+                                    <select class="form-control select2" name="selected_option" required="">
 
                                         @forelse($studentCourses as $sc)
                                             @if($student->id  == $sc->student_id)
-                                                <option value="{{$sc->course_id}}">{{ $sc->name }}</option>
+                                                <option id="a1" value="1">{{ $sc->name }}</option>
+{{--                                                <input type="hidden" name="{{$sc->course_id}}">--}}
                                             @else
                                                 {{--                                      <option value="">No record was found</option> --}}
                                             @endif
                                         @empty
                                             {{--                                    <option value="">No record was found</option> --}}
                                         @endforelse
+                                        @foreach($studentCoursePractical1 as $st)
+                                            @if($st->student_id == $student->id)
+                                                    <option id="a2" value="2">Practical Driving Course</option>
+{{--                                                    <input type="hidden" name="{{$sc->id}}">--}}
+                                            @endif
+                                        @endforeach
                                     </select>
+{{--                                    testing -----------------------}}
+                                    @forelse($studentCourses as $sc)
+                                        @if($student->id  == $sc->student_id)
+                                            <input name="a3" type="hidden"  value="{{$sc->course_id}}"/>
+                                            {{--                                                <input type="hidden" name="{{$sc->course_id}}">--}}
+                                        @else
+                                            {{--                                      <option value="">No record was found</option> --}}
+                                        @endif
+                                    @empty
+                                        {{--                                    <option value="">No record was found</option> --}}
+                                    @endforelse
+                                    @foreach($studentCoursePractical1 as $st)
+                                        @if($st->student_id == $student->id)
+                                            <input name="a4"  type="hidden" value="{{ $st }}"/>
+                                            {{--                                                    <input type="hidden" name="{{$sc->id}}">--}}
+                                        @endif
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
                         <div class="form-group newamount" require>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="number" class="form-control" placeholder="00.00 (&#8369)" min="0" max="100000" step="1" value="" name="amount">
+                                    <input type="number" class="form-control" placeholder="00.00 (&#8369)" min="0"
+                                           max="100000" step="1" value="" name="amount">
                                 </div>
                             </div>
                         </div>
@@ -61,7 +87,7 @@
                             <div class="row">
                                 <div class="col-md-12">
 
-                                    <input type="submit" name="" value="Add" class="btn btn-primary btn-block" />
+                                    <input type="submit" name="" value="Add" class="btn btn-primary btn-block"/>
                                     <!-- <button class="btn btn-primary btn-block" type="submit">Create Account</button>
                                    -->
                                 </div>

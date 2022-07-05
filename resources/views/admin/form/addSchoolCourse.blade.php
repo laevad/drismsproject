@@ -25,7 +25,8 @@
         </div>
     @endif
 
-    <form action="{{ route('school.courseSchoolStore')}}" method="post">
+    <form action="{{ route('school.courseSchoolStore')}}" method="post" oninput="cal()">
+        
         @csrf
         <input type="hidden" value="{{$id}}" name="school_id"/>
 
@@ -34,11 +35,11 @@
 
                 <div class="col-md-3 form-group">
                     <label>Time Start</label>
-                    <input required type="time" class="form-control" name="time_start">
+                    <input required type="time" class="form-control" name="time_start" id="time_start">
                 </div>
                 <div class="col-md-3 form-group">
                     <label>Time end</label>
-                    <input required type="time" class="form-control" name="time_end">
+                    <input required type="time" class="form-control" name="time_end" id="time_end">
                 </div>
 
                 <div class="col-md-6">
@@ -59,36 +60,36 @@
         </div>
 
 
-        <div class="form-group">
+{{--        <div class="form-group">--}}
 
-            <div class="row">
-                <div class="col-md-6">
-                    <label>Start</label>
-                    <input type="date" name="start" class="form-control"  required=""/>
-                </div>
-                <div class="col-md-6">
-                    <label>End</label>
-                    <input type="date" name="end" class="form-control"  required=""/>
-                </div>
+{{--            <div class="row">--}}
+{{--                <div class="col-md-6">--}}
+{{--                    <label>Start</label>--}}
+{{--                    <input type="date" name="start" class="form-control"  required=""/>--}}
+{{--                </div>--}}
+{{--                <div class="col-md-6">--}}
+{{--                    <label>End</label>--}}
+{{--                    <input type="date" name="end" class="form-control"  required=""/>--}}
+{{--                </div>--}}
 
-            </div>
-        </div>
+{{--            </div>--}}
+{{--        </div>--}}
 
 
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
                     <label>Duration</label>
-                    <input type="number" name="duration" class="form-control" placeholder="Duration" required="">
+                    <input type="number" min="1" max="12" name="duration" id="duration" onkeyup="" class="form-control" placeholder="Duration" required="">
                 </div>
 
                 <div class="col-md-6">
                     <label>Period</label>
                     <select name="period" class="form-control" required="">
                         <option value="Hours">Hours</option>
-                        <option value="Days">Days</option>
-                        <option value="Weeks">Weeks</option>
-                        <option value="Months">Months</option>
+{{--                        <option value="Days">Days</option>--}}
+{{--                        <option value="Weeks">Weeks</option>--}}
+{{--                        <option value="Months">Months</option>--}}
                     </select>
                 </div>
             </div>
@@ -101,7 +102,7 @@
 
                         <label>Course</label>
                         <select class="form-control select2" name="course_id" id="select-course" required="">
-                            <option value="">Select Course</option>
+{{--                            <option value="">Select Course</option>--}}
                             @foreach($courses as $course)
                                 <option value="{{$course->id}}">{{ $course->name }}</option>
                             @endforeach

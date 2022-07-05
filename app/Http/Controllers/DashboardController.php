@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Dashboard;
 use App\FleetSchedule;
+use App\Invoice;
+use App\InvoicePractical;
 use App\User;
 use App\Image;
 use App\Notification;
@@ -112,7 +114,11 @@ class DashboardController extends Controller
             ['student_id', '=', Auth::user()->id],
         ])->get();
 
-//        dd($student_access_practical);
+
+        $print_theo = Invoice::where("user_id","=",Auth::user()->id)->get();
+        $print_prac = InvoicePractical::where("user_id","=",Auth::user()->id)->get();
+
+//        dd($print_theo->isEmpty());
 
         $student_access_practical_in_progress = FleetSchedule::where([
             ['status', '=', 'inprogress'],
@@ -133,6 +139,8 @@ class DashboardController extends Controller
         // dd($student_certification);
         return view('dashboard', compact(
             'student_access_theoretical_in_progress',
+            'print_theo',
+            'print_prac',
             'student_access_practical_in_progress',
             'student_access_theoretical',
             'classPracticalStudent',

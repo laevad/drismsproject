@@ -27,7 +27,7 @@
     @endif
 
     <div>
-        <form action="{{ route('fleet.form.update', $fleet->id) }}" method="post">
+        <form action="{{ route('fleet.form.update', $fleet->id) }}" method="post" oninput="cal()">
             @csrf
             @method('PUT')
 
@@ -36,11 +36,11 @@
 
                     <div class="col-md-3 form-group">
                         <label>Time Start</label>
-                        <input required type="time" class="form-control" name="time_start" value="{{ $fleet->time_start }}">
+                        <input required type="time" class="form-control" id="time_start" name="time_start" value="{{ $fleet->time_start }}">
                     </div>
                     <div class="col-md-3 form-group">
                         <label>Time end</label>
-                        <input required type="time" class="form-control" name="time_end" value="{{ $fleet->time_end }}">
+                        <input required type="time" class="form-control" id="time_end" name="time_end" value="{{ $fleet->time_end }}">
                     </div>
                     <div class="col-md-6">
                         <label>Day</label>
@@ -129,7 +129,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label>Duration</label>
-                        <input type="number" name="duration" class="form-control" placeholder="Duration" required="" value="{{$fleet->duration}}">
+                        <input type="number" name="duration" class="form-control" id="duration" placeholder="Duration" required="" value="{{$fleet->duration}}">
                     </div>
 
                     <div class="col-md-6">

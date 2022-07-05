@@ -275,72 +275,136 @@ class SchoolController extends Controller
 
 
         return view('admin/review/reviewCourseSchool', compact('school_corses', 'id', 'permission_status', 'permission_delete'));
+
     }
 
 
     public function courseSchoolStore(Request $request)
     {
 
+        if(strtotime($request->time_start)>strtotime($request->time_end)){
+            return redirect()
+                ->back()
+                ->with('error', 'time end must higher than time start .');
+        }
+
+
         // $existSC = SchoolCourse::whereIn('course_id', $request->course_id, 'amd')
         // ->whereIn('school_id', $request->school_id )->get();
         //dd($request);
         $data = '';
-        foreach ($request->day as $key => $val) {
-            if ($key == array_key_last($request->day)) {
-                $data .= '' . $val;
-            } else {
-                $data .= '' . $val . ', ';
-            }
-        }
+//        foreach ($request->day as $key => $val) {
+//            if ($key == array_key_last($request->day)) {
+//                $data .= '' . $val;
+//            } else {
+//                $data .= '' . $val . ', ';
+//            }
+//        }
+//        $days = Day::where("sc_id", '=', $request->school_id )->first();
+//        dd( $request->school_id);
         $scs = SchoolCourse::all();
 
         $status = false;
+
+        if ($scs->isEmpty()){
+            $data = '';
+            $data1 = [];
+            foreach ($request->day as $key => $val) {
+                if ($key == array_key_last($request->day)) {
+                    $data .= '' . $val;
+                } else {
+                    $data .= '' . $val . ', ';
+                }
+            }
+        }
+        $status1 = false;
         foreach ($scs as $sc) {
             if ($sc->course_id == $request->course_id && $sc->school_id == $request->school_id) {
-                $status = true;
+                $status1 = true;
+
+//                dd("test");
+            }
+
+        }
+        if($status1){
+            $days = Day::where("sc_id", '=', $sc->id)->first();
+
+//                dd($days);
+            foreach ($request->day as $key => $val) {
+                if ($key == array_key_last($request->day)) {
+                    $data .= '' . $val;
+                } else {
+                    $data .= '' . $val . ', ';
+                }
+            }
+            foreach ($request->day as $key => $val) {
+                foreach (explode(', ', $days->day) as $day) {
+//                    echo "$day";
+                    if( $val == $day){
+//                                echo $val."<br>";
+//                                echo $sc->time_start." : ".$sc->time_end."<br>";
+                        if(strtotime($request->time_start) >= strtotime($sc->time_start) && strtotime($request->time_start) <= strtotime($sc->time_end)  ){
+                            $status=true;
+                        }
+                        if(strtotime($request->time_end) >= strtotime($sc->time_start) && strtotime($request->time_end) <= strtotime($sc->time_end)  ){
+                            $status=true;
+                        }
+                    }
+//                    echo $day;
+                }
+            }
+
+        }
+//        dd($data);
+//        dd($request->day);
+//        dd($request->day);
+        if ($status) {
+
+            return redirect()
+                ->back()
+                ->with('exist', 'time already exists.');
+        } else {
+            $newCourse = new SchoolCourse();
+
+            $newCourse->time_start = $request->time_start;
+            $newCourse->time_end = $request->time_end;
+            $newCourse->start = $request->start;
+            $newCourse->end = $request->end;
+            $newCourse->duration = $request->duration;
+            $newCourse->period = $request->period;
+            $newCourse->school_id = $request->school_id;
+            $newCourse->branch_id = $request->branch_id;
+            $newCourse->instructor_id = $request->instructor_id;
+            $newCourse->course_id = $request->course_id;
+            $newCourse->save();
+
+            $day = new Day();
+            $day->day = $data;
+            $day->sc_id = $newCourse->id;
+            $is_save = $day->save();
+
+
+            if ($is_save) {
+                $notification1 = new Notification();
+                // $notification->image_id = $imagemodel->id;
+                $notification1->user_id = $request->instructor_id;
+                $notification1->status = 'active';
+                $notification1->type = 'message';
+                $notification1->message = "New theoretical course has been added";;
+                $notification1->save();
+                
+                return redirect()
+                    ->back()
+                    ->with('success', 'New Course record added!');
+
+
+            } else {
+                return redirect()
+                    ->back()
+                    ->with('error', 'Failed to save data!!!');
             }
         }
 
-        // if($status){
-
-        //     return  redirect()
-        //             ->back()
-        //             ->with('exist', 'Course already exists.');
-        // }else{
-
-
-        $newCourse = new SchoolCourse();
-
-        $newCourse->time_start = $request->time_start;
-        $newCourse->time_end = $request->time_end;
-        $newCourse->start = $request->start;
-        $newCourse->end = $request->end;
-        $newCourse->duration = $request->duration;
-        $newCourse->period = $request->period;
-        $newCourse->school_id = $request->school_id;
-         $newCourse->branch_id = $request->branch_id;
-        $newCourse->instructor_id = $request->instructor_id;
-        $newCourse->course_id = $request->course_id;
-        $newCourse->save();
-
-        $day = new Day();
-        $day->day = $data;
-        $day->sc_id = $newCourse->id;
-        $is_save = $day->save();
-
-
-        if ($is_save) {
-
-            return redirect()
-                ->back()
-                ->with('success', 'New Course record added!');
-
-
-        } else {
-            return redirect()
-                ->back()
-                ->with('error', 'Failed to save data!!!');
-        }
 
         // }
         //DB::beginTransaction();
@@ -467,7 +531,7 @@ class SchoolController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\School $school
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public
     function update(Request $request, $id)
@@ -505,7 +569,7 @@ class SchoolController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\School $school
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public
     function destroy($id)
@@ -531,10 +595,14 @@ class SchoolController extends Controller
         return redirect()->back()->with('error', 'Sorry, we have trouble to update data from School');
 
     }
-    public  function  deleteCourses($id){
+
+    public function deleteCourses($id)
+    {
+//        dd($id);
         $school_course = SchoolCourse::find($id);
-        $days = Day::find($id);
-        if($school_course && $days){
+        $days = Day::where("sc_id","=",$id);
+//        dd($days);
+        if ($school_course && $days) {
             $school_course->delete();
             $days->delete();
 
@@ -543,9 +611,9 @@ class SchoolController extends Controller
             $notification1->user_id = Auth::user()->id;
             $notification1->status = 'active';
             $notification1->type = 'delete';
-            $notification1->message = "Fleet (" . $school_course->make. " ". $school_course->model .") has been deleted by: " . Auth::user()->fname . ' '. Auth::user()->lname. "</strong> ";
+            $notification1->message = "Fleet (" . $school_course->make . " " . $school_course->model . ") has been deleted by: " . Auth::user()->fname . ' ' . Auth::user()->lname . "</strong> ";
             $notification1->save();
-            return  redirect()->back()->with('success', 'Fleet deleted successfully!');
+            return redirect()->back()->with('success', 'Fleet deleted successfully!');
         }
         return redirect()->back()->with('error', 'Sorry, we have trouble to delete this fleet.');
     }
