@@ -45,9 +45,9 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' =>  dirname(__DIR__) . '/public_html/images'
+//            'root' =>  dirname(__DIR__) . '/public_html/images'
            // 'root' => public_path('images'),
-          //  'root' => storage_path('app'),
+            'root' => storage_path('app'),
         ],
 
         // 'public' => [
@@ -56,13 +56,20 @@ return [
         //     'url' => env('APP_URL').'/public_html',
         //     'visibility' => 'public_html',
         // ],
+//        'public' => [
+//            'driver' => 'local',
+//            'root' =>   dirname(__DIR__) . '/public_html/images',
+//            'url' => env('APP_URL').'/public_html',
+//            'visibility' => 'public_html',
+//        ],
+
         'public' => [
             'driver' => 'local',
-            'root' =>   dirname(__DIR__) . '/public_html/images',
-            'url' => env('APP_URL').'/public_html',
-            'visibility' => 'public_html',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
         ],
-      
+
         // 'public' => [
         //   'driver' => 'local',
         //     'root' => storage_path('app/public/images'),
