@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Drisms') }}</title>
     <link rel="shortcut icon" href="{{ asset('/assets/images/icon.ico') }}">
-
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="{{ asset('css/css/simcify.min.css') }}" />
      <!-- Material design icons -->
     <link rel="stylesheet" href="{{ asset('css/fonts/mdi/css/materialdesignicons.min.css') }}" />
